@@ -4,7 +4,7 @@ Purpose of Language Models: Assign a probability to a sentence, to distinguish b
 
 ## Applications:
 1. Machine Translation: P(high winds tonight) > P(large winds tonight)
-2. Spelling correction: P(about fifteen minutes from) > P(about fifteen minutes from)
+2. Spelling correction: P(about fifteen minutes from) > P(about fifteen minuets from)
 3. Speech Recognition: P(I saw a van) > P(eyes awe of an)
 4. Summarization, question answering, etc.
 

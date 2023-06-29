@@ -18,5 +18,45 @@ The language model computes either of:
 
 The Chain Rule: $P(x_1, x_2, x_3, …, x_n) = P(x_1)P(x_2|x_1)P(x_3|x_1,x_2)…P(x_n|x_1,…,x_{n-1})$
 
+> $P(“The water is so clear”) = P(The) × P(water|The) × P(is|The water) × P(so|The water is) × P(clear | The water is so)$
 
+What just happened? The Chain Rule is applied to compute the joint probability of words in a sentence
+
+## How to estimate these probabilities?
+
+Amusing we have a large text corpus (data set of test like Wikipedia), we can count and divide as follows:
+
+- $P(clear |The water is so) = Count (The water is so clear) / Count (The water is so)$
+
+However, we can't do that! We’ll never see enough data for estimating these!
+
+Markov Assumption (Simplifying assumption)
+- $P(clear |The water is so) almost equal to P(clear | so)$
+- Or $P(clear |The water is so) almost equal to P(clear | is so)$
+
+Formally:
+- $P(w_ 1 w_2 … w_n ) ≈ ∏i P(w_i | w_{i−k} … w_{i−1})$
+- $P(w_i | w_1 w_2 … w_{i−1}) ≈ P(w_i | w_{i−k} … w_{i−1})$
+- Unigram model: $P(w_1 w_2 … w_n ) ≈ ∏i P(w_i)$
+- Bigram model: $P(w_i | w_1 w_2 … w{i−1}) ≈ P(w_i | w_{i−1})$
+
+> We can extend to trigrams, 4-grams, 5-grams and N-grams.
+
+ In general, this is an insufficient model of language because the language has long-distance dependencies. However, in practice, these 3,4 grams work well for most of the applications.
+
+### Estimating bigram probabilities:
+The Maximum Likelihood Estimate (MLE): of all the times we saw the word wi-1, how many times it was followed by the word wi
+
+$P(w_i | w_{i−1}) = count(w_{i−1}, w_i) / count(w_{i−1})$
+Practical Issue: We do everything in log space to avoid underflow
+$log(p1 × p2 × p3 × p4 ) = log p1 + log p2 + log p3 + log p4$
+
+## Language Modeling Toolkits:
+to do 
+
+## Evaluation: How good is our model?
+to do 
+
+## Further readings:
+to do 
 

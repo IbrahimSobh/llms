@@ -10,7 +10,8 @@ The main purpose of **Language Models** is to assign a probability to a sentence
 1. Machine Translation: P(high winds tonight) > P(large winds tonight)
 2. Spelling correction: P(about fifteen minutes from) > P(about fifteen minuets from)
 3. Speech Recognition: P(I saw a van) > P(eyes awe of an)
-4. Summarization, question answering, etc.
+4. Authorship identification: who wrote some sample text
+5. Summarization, question answering, dialogue bots, etc.
 
 For Speech Recognition, we use not only the acoustics model (the speech signal), but also a language model. Similarly, for Optical Character Recognition (OCR), we use both a vision model and a language model. Language models are very important for such recognition systems.
 
@@ -24,15 +25,29 @@ The Chain Rule: $P(x_1, x_2, x_3, …, x_n) = P(x_1)P(x_2|x_1)P(x_3|x_1,x_2)…P
 
 > $P(The, water, is, so, clear) = P(The) × P(water|The) × P(is|The, water) × P(so|The, water, is) × P(clear | The, water, is, so)$
 
-What just happened? The Chain Rule is applied to compute the joint probability of words in a sentence
+What just happened? The Chain Rule is applied to compute the joint probability of words in a sentence.
 
 ---
 
 ## Statistical Language Modeling:
 
+### n-gram Language Models
+Using a large amount of text (corpus), we collect statistics about how frequently different words are, and use these to predict the next word. For example, the probability that a word w comes after these three words *students opened their* can be estimated as follows: 
+- $P(w | students, opened, their) = count of (students, opened, their, w) / count of (students, opened, their)$
+
+The above example is a 4-gram model. And we may get: 
+- $P(books | students, opened, their) = 0.4$
+- $P(cars | students, opened, their) = 0.05$
+- $P(... | students, opened, their) = ...$
+
+> We can conclude that the word “books” is more probable than “cars” in this context. 
+
+Accordingly, arbitrary text can be generated from a language model given starting word(s), by sampling from the output probability distribution of the next word, and so on.
+
+
 ### How to estimate these probabilities?
 
-Amusing we have a large text corpus (data set of test like Wikipedia), we can count and divide as follows:
+Amusing we have a large text corpus (data set like Wikipedia), we can count and divide as follows:
 
 - $P(clear |The, water, is, so) = Count (The, water, is, so, clear) / Count (The, water, is, so)$
 
@@ -52,13 +67,14 @@ Formally:
 
  In general, this is an insufficient model of language because the language has long-distance dependencies. However, in practice, these 3,4 grams work well for most of the applications.
 
+<!---
 ### Estimating bigram probabilities:
 The Maximum Likelihood Estimate (MLE): of all the times we saw the word wi-1, how many times it was followed by the word wi
 
 $P(w_i | w_{i−1}) = count(w_{i−1}, w_i) / count(w_{i−1})$
 Practical Issue: We do everything in log space to avoid underflow
 $log(p1 × p2 × p3 × p4 ) = log p1 + log p2 + log p3 + log p4$
-
+-->
 
 ### Building Statistical Language Models:
 
@@ -107,7 +123,6 @@ Try some examples of your own using [Google Books Ngram Viewer](https://books.go
 
 ![ngramviewer.png](images/ngramviewer.png)
 
-
 ---
 
 ## Evaluation: How good is our model?
@@ -122,20 +137,26 @@ Try some examples of your own using [Google Books Ngram Viewer](https://books.go
 
 ### Intrinsic evaluation:
 
-- Intuition: The best language model is one that best predicts an unseen test set (assigns high probability to sentences).
+- **Intuition**: The best language model is one that best predicts an unseen test set (assigns high probability to sentences).
+- **Perplexity** is the standard evaluation metric for Language Models.
+- **Perplexity** is defined as the inverse probability of a text, according to the Language Model.
+- A good language model should give a lower Perplexity for a test text. Specifically, a lower perplexity for a given text means that text has a high probability in the eyes of that Language Model.
 
 > Perplexity is the inverse probability of the test set, normalized by the number of words
 
-![Perplexity.png](images/Perplexity.png)
+
+![preplexity02.png](images/preplexity02.png)
 
 > Lower perplexity = Better model
 
 > Perplexity is related to branch factor: On average, how many things could occur next.
 
-![wsj.png](images/wsj.png)
 
-Using the Wall Street Journal (WSJ) Corpus: As expected, it is clear that the Trigram model is better than the Bigram model. Similarly, the bigram model is better than the naive unigram model. (Remember: Lower perplexity (less branching) = Better model)
-
+### Limitations of Statistical Language
+ 
+- What if “students opened their” never occurred in data? (Sparsity problem) We may condition on “opened their” instead (_backoff_).
+- What if “students opened their ” never occurred in data? We may add a small 𝛿 to the count for every w (_smoothing_).
+- Large storage requirements: Need to store count for all n-grams you saw in the corpus.
 
 ---
 
@@ -144,4 +165,26 @@ Using the Wall Street Journal (WSJ) Corpus: As expected, it is clear that the Tr
 - [Book: Speech and Language Processing; Daniel Jurafsky](https://www.amazon.com/Speech-Language-Processing-Daniel-Jurafsky/dp/0131873210)
 - [Video: Natural Language Processing](https://www.youtube.com/playlist?list=PLQiyVNMpDLKnZYBTUOlSI9mi9wAErFtFm)
 - [Gentle Introduction to Statistical Language Modeling and Neural Language Models](https://machinelearningmastery.com/statistical-language-modeling-and-neural-language-models/)
+
+
+---
+
+## Neural Language Models (NLM)
+
+NLM usually (but not always) uses an RNN to learn sequences of words (sentences, paragraphs, … etc) and hence can predict the next word. 
+
+Advantages: 
+- Can process variable-length input
+- Computations for step t use information from many steps back
+- Model size doesn’t increase for longer input, the same weights are applied on every timestep.
+
+![nlm01.png](images/nlm01.png)
+
+As depicted, At each step, we have a probability distribution of the next word over the vocabulary.
+Disadvantages: 
+- Recurrent computation is slow (sequential, one step at a time)
+- In practice, for long sequences, difficult to access information from many steps back
+
+### Transformer based Lnaguiage models   
+
 

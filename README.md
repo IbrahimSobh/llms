@@ -85,21 +85,27 @@ Number of fourgrams:     1,313,818,354
 Number of fivegrams:     1,176,470,663
 ```
 
-The following is an example of the **3-gram** data contained in this corpus:
+
+The following is an example of the **4-gram** data in this corpus:
 
 ```
-ceramics collectables collectibles 55
-ceramics collectables fine 130
-ceramics collected by 52
-ceramics collectible pottery 50
-ceramics collectibles cooking 45
-ceramics collection , 144
-ceramics collection . 247
-ceramics collection </S> 120
-ceramics collection and 43
-ceramics collection at 52
-ceramics collection is 68
+serve as the incoming 92
+serve as the incubator 99
+serve as the independent 794
+serve as the index 223
+serve as the indication 72
+serve as the indicator 120
+serve as the indicators 45
+serve as the indispensable 111
+serve as the indispensible 40
 ```
+
+For example, the sequence of the four words "serve as the indication" has been seen in the corpus 72 times.
+
+
+Try some examples of your own using [Google Books Ngram Viewer](https://books.google.com/ngrams/) and see the frequency of likely and unlikely N-grams.
+
+![ngramviewer.png](images/ngramviewer.png)
 
 
 ---

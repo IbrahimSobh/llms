@@ -59,13 +59,47 @@ $log(p1 × p2 × p3 × p4 ) = log p1 + log p2 + log p3 + log p4$
 
 ---
 
-## Classical Language Modeling:
+## Building Classical Language Models:
+
+### Toolkits
 
 - [SRILM](http://www.speech.sri.com/projects/srilm/) is a toolkit for building and applying statistical language models, primarily for use in speech recognition, statistical tagging and segmentation, and machine translation. It has been under development in the SRI Speech Technology and Research Laboratory since 1995.
 - [KenLM](https://kheafield.com/code/kenlm/) is a fast and scalable toolkit that builds and queries language models.
 
+### N-gram Models
+
 ## Google's N-gram Models Belong to You
-Google Research has been using word n-gram models for a variety of R&D projects. [Google N-Gram](http://www.speech.sri.com/projects/srilm/) processed 1,024,908,267,229 words of running text and published the counts for all 1,176,470,663 five-word sequences that appear at least 40 times.
+Google Research has been using word n-gram models for a variety of R&D projects. [Google N-Gram](https://ai.googleblog.com/2006/08/all-our-n-gram-are-belong-to-you.html) processed 1,024,908,267,229 words of running text and published the counts for all 1,176,470,663 five-word sequences that appear at least 40 times.
+
+The counts of text from the Linguistics Data Consortium [LDC](https://www.ldc.upenn.edu/) are as follows:
+
+```
+File sizes: approx. 24 GB compressed (gzip'ed) text files
+
+Number of tokens:    1,024,908,267,229
+Number of sentences:    95,119,665,584
+Number of unigrams:         13,588,391
+Number of bigrams:         314,843,401
+Number of trigrams:        977,069,902
+Number of fourgrams:     1,313,818,354
+Number of fivegrams:     1,176,470,663
+```
+
+The following is an example of the **3-gram** data contained in this corpus:
+
+```
+ceramics collectables collectibles 55
+ceramics collectables fine 130
+ceramics collected by 52
+ceramics collectible pottery 50
+ceramics collectibles cooking 45
+ceramics collection , 144
+ceramics collection . 247
+ceramics collection </S> 120
+ceramics collection and 43
+ceramics collection at 52
+ceramics collection is 68
+```
 
 
 ---

@@ -28,7 +28,9 @@ What just happened? The Chain Rule is applied to compute the joint probability o
 
 ---
 
-## How to estimate these probabilities?
+## Statistical Language Modeling:
+
+### How to estimate these probabilities?
 
 Amusing we have a large text corpus (data set of test like Wikipedia), we can count and divide as follows:
 
@@ -57,19 +59,17 @@ $P(w_i | w_{i−1}) = count(w_{i−1}, w_i) / count(w_{i−1})$
 Practical Issue: We do everything in log space to avoid underflow
 $log(p1 × p2 × p3 × p4 ) = log p1 + log p2 + log p3 + log p4$
 
----
 
-## Building Classical Language Models:
+### Building Statistical Language Models:
 
-### Toolkits
+#### Toolkits
 
 - [SRILM](http://www.speech.sri.com/projects/srilm/) is a toolkit for building and applying statistical language models, primarily for use in speech recognition, statistical tagging and segmentation, and machine translation. It has been under development in the SRI Speech Technology and Research Laboratory since 1995.
 - [KenLM](https://kheafield.com/code/kenlm/) is a fast and scalable toolkit that builds and queries language models.
 
-### N-gram Models
+#### N-gram Models
 
-## Google's N-gram Models Belong to You
-Google Research has been using word n-gram models for a variety of R&D projects. [Google N-Gram](https://ai.googleblog.com/2006/08/all-our-n-gram-are-belong-to-you.html) processed 1,024,908,267,229 words of running text and published the counts for all 1,176,470,663 five-word sequences that appear at least 40 times.
+Google's N-gram Models Belong to You: Google Research has been using word n-gram models for a variety of R&D projects. [Google N-Gram](https://ai.googleblog.com/2006/08/all-our-n-gram-are-belong-to-you.html) processed 1,024,908,267,229 words of running text and published the counts for all 1,176,470,663 five-word sequences that appear at least 40 times.
 
 The counts of text from the Linguistics Data Consortium [LDC](https://www.ldc.upenn.edu/) are as follows:
 
@@ -111,10 +111,37 @@ Try some examples of your own using [Google Books Ngram Viewer](https://books.go
 ---
 
 ## Evaluation: How good is our model?
-to do 
+
+> Does our language model prefer good (likely) sentences to bad ones?
+
+### Extrinsic evaluation:
+
+1. For comparing models A and B, put each model in a task (spelling, corrector, speech recognizer, machine translation)
+2. Run the task and compare the accuracy for A and for B
+3. Best evaluation but not practical and time consuming!
+
+### Intrinsic evaluation:
+
+- Intuition: The best language model is one that best predicts an unseen test set (assigns high probability to sentences).
+
+> Perplexity is the inverse probability of the test set, normalized by the number of words
+
+![Perplexity.png](images/Perplexity.png)
+
+> Lower perplexity = Better model
+
+> Perplexity is related to branch factor: On average, how many things could occur next.
+
+![wsj.png](images/wsj.png)
+
+Using the Wall Street Journal (WSJ) Corpus: As expected, it is clear that the Trigram model is better than the Bigram model. Similarly, the bigram model is better than the naive unigram model. (Remember: Lower perplexity (less branching) = Better model)
+
 
 ---
 
 ## Further readings:
-to do 
+
+- [Book: Speech and Language Processing; Daniel Jurafsky](https://www.amazon.com/Speech-Language-Processing-Daniel-Jurafsky/dp/0131873210)
+- [Video: Natural Language Processing](https://www.youtube.com/playlist?list=PLQiyVNMpDLKnZYBTUOlSI9mi9wAErFtFm)
+- [Gentle Introduction to Statistical Language Modeling and Neural Language Models](https://machinelearningmastery.com/statistical-language-modeling-and-neural-language-models/)
 

@@ -182,9 +182,46 @@ Advantages:
 
 As depicted, At each step, we have a probability distribution of the next word over the vocabulary.
 Disadvantages: 
-- Recurrent computation is slow (sequential, one step at a time)
-- In practice, for long sequences, difficult to access information from many steps back
+- Recurrent computation is _slow_ (sequential, one step at a time)
+- In practice, for long sequences, difficult_ to access information_ from many steps back
 
-### Transformer based Lnaguiage models   
+### Transformer-based Language models   
 
+The Transformer architecture was proposed in the paper [Attention is All You Need](https://arxiv.org/abs/1706.03762), used for the Neural Machine Translation task (NMT), consisting of: 
+- **Encoder**: Network that encodes the input sequence.
+- **Decoder**: Network that generates the output sequences conditioned on the input.
+
+As mentioned in the paper: 
+> "_We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely_"
+
+The main idea of **attention** can be summarized as mentioned in the OpenAi's [article](https://openai.com/blog/sparse-transformer/):
+> "_... every output element is connected to every input element, and the weightings between them are **dynamically calculated based upon the circumstances**, a process called attention._"
+
+Based on this architecture (the vanilla Transformers!), **encoder or decoder** components can be used alone to enable massive pre-trained generic models that can be fine-tuned for downstream tasks such as text classification, translation, summarization, question answering, etc. For Example:
+
+- "Pre-training of Deep Bidirectional Transformers for Language Understanding" [BERT](https://arxiv.org/abs/1810.04805) is mainly based on the encoder architecture trained on massive text datasets to predict randomly masked words and "is-next sentence" classification tasks.
+- [GPT](https://arxiv.org/pdf/2005.14165.pdf), on the other hand, is an auto-regressive generative model that is mainly based on the decoder architecture, trained on massive text datasets to predict the next word (unlike BERT, GPT can generate sequences).
+
+> These models, BERT and GPT for instance, can be considered as the NLP's ImageNET.
+
+![bertvsgpt.png](images/bertvsgpt.png)
+
+As shown, BERT is deeply bidirectional, OpenAI GPT is unidirectional, and ELMo is shallowly bidirectional.
+
+Pre-trained representations can be:
+- **Context-free**: such as word2vec or GloVe that generates a single/fixed word embedding (vector) representation for each word in the vocabulary (independent of the context of that word at test time)
+- **Contextual**: generates a representation of each word based on the other words in the sentence.
+
+Contextual Language models can be:
+- **Causal language model (CML)**: Predict the next token passed on previous ones. (GPT)
+- **Masked language model (MLM)**: Predict the masked token based on the surrounding contextual tokens (BERT)
+  
+#### To do
+- Code Bert https://colab.research.google.com/drive/17sJR6JwoQ7Trr5WsUUIpHLZBElf8WrVq?usp=sharing#scrollTo=-u2Feyk5Gg7o
+- Code GPT
+- Code Falcon
+- Code GPT4ALL
+- Code CodeTF
+- Chat with my docs
+- etc.
 

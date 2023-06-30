@@ -32,7 +32,7 @@ What just happened? The Chain Rule is applied to compute the joint probability o
 ## Statistical Language Modeling:
 
 ### n-gram Language Models
-Using a large amount of text (corpus), we collect statistics about how frequently different words are, and use these to predict the next word. For example, the probability that a word w comes after these three words *students opened their* can be estimated as follows: 
+Using a large amount of text (corpus such as Wikipedia), we collect statistics about how frequently different words are, and use these to predict the next word. For example, the probability that a word w comes after these three words *students opened their* can be estimated as follows: 
 - $P(w | students, opened, their) = count of (students, opened, their, w) / count of (students, opened, their)$
 
 The above example is a 4-gram model. And we may get: 
@@ -44,21 +44,23 @@ The above example is a 4-gram model. And we may get:
 
 Accordingly, arbitrary text can be generated from a language model given starting word(s), by sampling from the output probability distribution of the next word, and so on.
 
-
+<!--
 ### How to estimate these probabilities?
 
 Amusing we have a large text corpus (data set like Wikipedia), we can count and divide as follows:
 
 - $P(clear |The, water, is, so) = Count (The, water, is, so, clear) / Count (The, water, is, so)$
+-->
 
-However, we can't do that! We’ll never see enough data for estimating these!
+Sparsity: Sometimes we do not have enough data to estimate the following: 
+- $P(clear |The, water, is, so) = Count (The, water, is, so, clear) / Count (The, water, is, so)$
 
-Markov Assumption (Simplifying assumption)
+Markov Assumption (Simplifying assumption):
 - $P(clear |The, water, is, so) ≈ P(clear | so)$
 - Or $P(clear |The, water, is, so) ≈ P(clear | is, so)$
 
 Formally:
-- $P(w_ 1 w_2 … w_n ) ≈ ∏i P(w_i | w_{i−k} … w_{i−1})$
+- $P(w_1 w_2 … w_n ) ≈ ∏i P(w_i | w_{i−k} … w_{i−1})$
 - $P(w_i | w_1 w_2 … w_{i−1}) ≈ P(w_i | w_{i−k} … w_{i−1})$
 - Unigram model: $P(w_1 w_2 … w_n ) ≈ ∏i P(w_i)$
 - Bigram model: $P(w_i | w_1 w_2 … w{i−1}) ≈ P(w_i | w_{i−1})$

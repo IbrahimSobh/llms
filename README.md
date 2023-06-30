@@ -46,7 +46,7 @@ Formally:
 - Unigram model: $P(w_1 w_2 … w_n ) ≈ ∏i P(w_i)$
 - Bigram model: $P(w_i | w_1 w_2 … w{i−1}) ≈ P(w_i | w_{i−1})$
 
-> We can extend to trigrams, 4-grams, 5-grams and N-grams.
+> We can extend to trigrams, 4-grams, 5-grams, and N-grams.
 
  In general, this is an insufficient model of language because the language has long-distance dependencies. However, in practice, these 3,4 grams work well for most of the applications.
 
@@ -59,8 +59,14 @@ $log(p1 × p2 × p3 × p4 ) = log p1 + log p2 + log p3 + log p4$
 
 ---
 
-## Language Modeling Toolkits:
-to do 
+## Classical Language Modeling:
+
+- [SRILM](http://www.speech.sri.com/projects/srilm/) is a toolkit for building and applying statistical language models, primarily for use in speech recognition, statistical tagging and segmentation, and machine translation. It has been under development in the SRI Speech Technology and Research Laboratory since 1995.
+- [KenLM](https://kheafield.com/code/kenlm/) is a fast and scalable toolkit that builds and queries language models.
+
+## Google's N-gram Models Belong to You
+Google Research has been using word n-gram models for a variety of R&D projects. [Google N-Gram](http://www.speech.sri.com/projects/srilm/) processed 1,024,908,267,229 words of running text and published the counts for all 1,176,470,663 five-word sequences that appear at least 40 times.
+
 
 ---
 

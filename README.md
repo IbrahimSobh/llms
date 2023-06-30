@@ -1,10 +1,12 @@
-# llms
-
-Purpose of Language Models: Assign a probability to a sentence, to distinguish between the more likely and the less likely sentences.
+# Large Language Models (llms)
 
 ---
 
-## Applications:
+## Introduction: What is a language model?
+
+The main purpose of **Language Models** is to assign a probability to a sentence, to distinguish between the more likely and the less likely sentences.
+
+### Applications of language models:
 1. Machine Translation: P(high winds tonight) > P(large winds tonight)
 2. Spelling correction: P(about fifteen minutes from) > P(about fifteen minuets from)
 3. Speech Recognition: P(I saw a van) > P(eyes awe of an)

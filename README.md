@@ -155,7 +155,7 @@ Try some examples of your own using [Google Books Ngram Viewer](https://books.go
 > Perplexity is related to branch factor: On average, how many things could occur next.
 
 
-### Limitations of Statistical Language
+### Limitations of Statistical Language models
  
 - What if “students opened their” never occurred in data? (Sparsity problem) We may condition on “opened their” instead (_backoff_).
 - What if “students opened their ” never occurred in data? We may add a small 𝛿 to the count for every w (_smoothing_).

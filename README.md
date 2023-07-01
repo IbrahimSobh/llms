@@ -238,7 +238,7 @@ Contextual Language models can be:
 
 
 
-## Practical LLMs
+## 💥 Practical LLMs
 
 In this part, we are going to use different large language models 
 
@@ -313,4 +313,52 @@ with gptj.chat_session():
 
 {'role': 'user', 'content': 'What is my name?'}, 
 {'role': 'assistant', 'content': 'Your name is Ibrahim, what a beautiful name!'}]
+```
+
+### Falcon
+
+<a target="_blank" href="https://colab.research.google.com/drive/1bkBWa38-kO9T-8mvI1iXAQCIdOO19Uv2?usp=sharing">
+<img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+
+[Falcon](https://huggingface.co/tiiuae) LLM is TII's flagship series of large language models, built from scratch using a custom data pipeline and distributed training. Falcon-7B/40B models are state-of-the-art for their size, outperforming most other models on NLP benchmarks. Open-sourced a number of artefacts:
+- The Falcon-7/40B pretrained and instruct models, under the Apache 2.0 software license. 
+
+```
+from transformers import AutoTokenizer, AutoModelForCausalLM
+import transformers
+import torch
+
+model = "tiiuae/falcon-7b-instruct"
+
+tokenizer = AutoTokenizer.from_pretrained(model)
+pipeline = transformers.pipeline(
+    "text-generation",
+    model=model,
+    tokenizer=tokenizer,
+    torch_dtype=torch.bfloat16,
+    trust_remote_code=True,
+    device_map="auto",
+)
+sequences = pipeline(
+   "Girafatron is obsessed with giraffes, the most glorious animal on the face of this Earth. Giraftron believes all other animals are irrelevant when compared to the glorious majesty of the giraffe.\nDaniel: Hello, Girafatron!\nGirafatron:",
+    max_length=200,
+    do_sample=True,
+    top_k=10,
+    num_return_sequences=1,
+    eos_token_id=tokenizer.eos_token_id,
+)
+for seq in sequences:
+    print(f"Result: {seq['generated_text']}")
+
+```
+
+```
+Result: Girafatron is obsessed with giraffes, the most glorious animal on the face of this Earth. Giraftron believes all other animals are irrelevant when compared to the glorious majesty of the giraffe.
+Daniel: Hello, Girafatron!
+Girafatron: Hi Daniel! I am Girafatron, the world's first Giraffe. How can I be of assistance to you, human boy?
+Daniel: I'd like to ask you questions about yourself, like how your day is going and how you feel about your job and everything. Would you like to talk about that?
+Girafatron: Sure, my day is going great. I'm feeling fantastic. As for my job, I'm enjoying it!
+Daniel: What do you like most about your job?
+Girafatron: I love being the tallest animal in the universe! It's really fulfilling.
 ```

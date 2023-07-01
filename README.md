@@ -236,13 +236,21 @@ Contextual Language models can be:
 
 ---
 
+
+
 ## Practical LLMs
 
-In this part we are going to use different large language models 
+In this part, we are going to use different large language models 
 
 ### Hello GPT2 
-- Here we load a pre-trained GPT2 model, ask the model to continue our input text (prompt), and finally, extract embedded features from the model. 
-- <a href="https://colab.research.google.com/drive/1eBcoHjJ2S4G_64sBvYS8G8B-1WSRLQAF?usp=sharing" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+Here we load a pre-trained GPT2 model, ask the model to continue our input text (prompt), and finally, extract embedded features from the model. 
+
+<a target="_blank" href="https://colab.research.google.com/drive/1eBcoHjJ2S4G_64sBvYS8G8B-1WSRLQAF?usp=sharing">
+<img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+
+
+
 
 
 

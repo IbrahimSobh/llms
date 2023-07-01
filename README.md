@@ -120,10 +120,11 @@ serve as the indispensible 40
 
 For example, the sequence of the four words "serve as the indication" has been seen in the corpus 72 times.
 
-
+<!---
 Try some examples of your own using [Google Books Ngram Viewer](https://books.google.com/ngrams/) and see the frequency of likely and unlikely N-grams.
 
 ![ngramviewer.png](images/ngramviewer.png)
+-->
 
 ---
 
@@ -222,6 +223,7 @@ Contextual Language models can be:
 - **Causal language model (CML)**: Predict the next token passed on previous ones. (GPT)
 - **Masked language model (MLM)**: Predict the masked token based on the surrounding contextual tokens (BERT)
   
+<!--
 #### To do
 - Code Bert https://colab.research.google.com/drive/17sJR6JwoQ7Trr5WsUUIpHLZBElf8WrVq?usp=sharing#scrollTo=-u2Feyk5Gg7o
 - Code GPT
@@ -230,4 +232,20 @@ Contextual Language models can be:
 - Code CodeTF
 - Chat with my docs
 - etc.
+-->
+
+---
+
+## Practical LLMs
+
+In this part we are going to use different large language models 
+
+### Hello GPT2 
+- Here we load a pre-trained GPT2 model, ask the model to continue our input text (prompt), and finally, extract embedded features from the model. 
+- <a href="https://colab.research.google.com/drive/1eBcoHjJ2S4G_64sBvYS8G8B-1WSRLQAF?usp=sharing" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
+
+
+
+ 
 

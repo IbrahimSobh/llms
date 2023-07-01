@@ -236,13 +236,11 @@ Contextual Language models can be:
 
 ---
 
-
-
 ## 💥 Practical LLMs
 
 In this part, we are going to use different large language models 
 
-### Hello GPT2 
+### 🚀 Hello GPT2 
 
 <a target="_blank" href="https://colab.research.google.com/drive/1eBcoHjJ2S4G_64sBvYS8G8B-1WSRLQAF?usp=sharing">
 <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -261,7 +259,7 @@ generator("The capital of Japan is Tokyo, The capital of Egypt is", max_length=1
 {'generated_text': 'The capital of Japan is Tokyo, The capital of Egypt is Alexandria'}]
 ```
 
-### Hello BERT 
+### 🚀 Hello BERT 
 
 <a target="_blank" href="https://colab.research.google.com/drive/1n8fd41Bi8yaWp0__eVCe9T4ctWVwSxvC?usp=sharing">
 <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -281,7 +279,7 @@ bert_tokenizer = tokenizer_class.from_pretrained(pretrained_weights)
 bert_model = model_class.from_pretrained(pretrained_weights)
 ```
 
-### GPT4ALL
+### 🚀 GPT4ALL
 
 <a target="_blank" href="https://colab.research.google.com/drive/1AONl_3F8C6fB2NKaQsuAHio0sdjulIRk?usp=sharing">
 <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -315,7 +313,7 @@ with gptj.chat_session():
 {'role': 'assistant', 'content': 'Your name is Ibrahim, what a beautiful name!'}]
 ```
 
-### Falcon
+### 🚀 Falcon
 
 <a target="_blank" href="https://colab.research.google.com/drive/1bkBWa38-kO9T-8mvI1iXAQCIdOO19Uv2?usp=sharing">
 <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -363,7 +361,7 @@ Daniel: What do you like most about your job?
 Girafatron: I love being the tallest animal in the universe! It's really fulfilling.
 ```
 
-### CodeT5+
+### 🚀 CodeT5+
 
 <a target="_blank" href="https://colab.research.google.com/drive/1Ik8w6BgHazuf45E5GrZd0vyx6SV3EOzG?usp=sharing">
 <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -409,4 +407,23 @@ def main():
 ```
 
 For more models, check [CodeTF](https://github.com/salesforce/CodeTF) from Salesforce, a Python transformer-based library for code large language models (Code LLMs) and code intelligence, providing a seamless interface for training and inferencing on code intelligence tasks like code summarization, translation, code generation, and so on.
+
+---
+
+## 💥 More LLMs
+
+🏔️ [Chat with Open Large Language Models](https://chat.lmsys.org/) 
+
+- **Vicuna**: a chat assistant fine-tuned from LLaMA on user-shared conversations by LMSYS	WizardLM: an instruction-following LLM using evol-instruct by Microsoft
+- **Guanaco**: a model fine-tuned with QLoRA by UW
+- **MPT-Chat**: a chatbot fine-tuned from MPT-7B by MosaicML
+- **Koala**: a dialogue model for academic research by BAIR
+- **RWKV-4-Raven**: an RNN with transformer-level LLM performance
+- **Alpaca**: a model fine-tuned from LLaMA on instruction-following demonstrations by Stanford
+- **ChatGLM**: an open bilingual dialogue language model by Tsinghua University
+- **OpenAssistant** (oasst): an Open Assistant for everyone by LAION
+- **LLaMA**: open and efficient foundation language models by Meta
+- **Dolly**: an instruction-tuned open large language model by Databricks
+- **FastChat-T5**: a chat assistant fine-tuned from FLAN-T5 by LMSYS	
+
 

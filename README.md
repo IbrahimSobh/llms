@@ -362,3 +362,47 @@ Girafatron: Sure, my day is going great. I'm feeling fantastic. As for my job, I
 Daniel: What do you like most about your job?
 Girafatron: I love being the tallest animal in the universe! It's really fulfilling.
 ```
+
+### CodeT5+
+
+[CodeT5+](https://github.com/salesforce/CodeT5/tree/main/CodeT5+) is a new family of open code large language models with an encoder-decoder architecture that can flexibly operate in different modes (i.e. encoder-only, decoder-only, and encoder-decoder) to support a wide range of code understanding and generation tasks.
+
+```
+from transformers import T5ForConditionalGeneration, AutoTokenizer
+
+checkpoint = "Salesforce/codet5p-770m-py"
+device = "cuda" # for GPU usage or "cpu" for CPU usage
+
+tokenizer = AutoTokenizer.from_pretrained(checkpoint)
+model = T5ForConditionalGeneration.from_pretrained(checkpoint).to(device)
+
+inputs = tokenizer.encode("def factorial(n):", return_tensors="pt").to(device)
+outputs = model.generate(inputs, max_length=150)
+print(tokenizer.decode(outputs[0], skip_special_tokens=True))
+```
+
+```
+def factorial(n):
+'''
+Returns the factorial of a given number.
+'''
+if n == 0:
+    return 1
+return n * factorial(n - 1)
+
+def main():
+    '''
+    Tests the factorial function.
+    '''
+    assert factorial(0) == 1
+    assert factorial(1) == 1
+    assert factorial(2) == 2
+    assert factorial(3) == 6
+    assert factorial(4) == 120
+    assert factorial(5) == 720
+    assert factorial(6) == 5040
+    assert factorial(7) == 5040
+```
+
+For more models, check [CodeTF](https://github.com/salesforce/CodeTF) from Salesforce, a Python transformer-based library for code large language models (Code LLMs) and code intelligence, providing a seamless interface for training and inferencing on code intelligence tasks like code summarization, translation, code generation, and so on.
+

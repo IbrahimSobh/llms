@@ -254,7 +254,9 @@ Here we load a pre-trained **GPT2** model, ask the model to continue our input t
 from transformers import pipeline
 generator = pipeline('text-generation', model='gpt2')
 generator("The capital of Japan is Tokyo, The capital of Egypt is", max_length=13, num_return_sequences=2)
+```
 
+```
 [{'generated_text': 'The capital of Japan is Tokyo, The capital of Egypt is Cairo'},
 {'generated_text': 'The capital of Japan is Tokyo, The capital of Egypt is Alexandria'}]
 ```
@@ -279,9 +281,32 @@ bert_tokenizer = tokenizer_class.from_pretrained(pretrained_weights)
 bert_model = model_class.from_pretrained(pretrained_weights)
 ```
 
-### Hello WHAT?!
+### GPT4ALL
 
-To Do 
+[GPT4All](https://docs.gpt4all.io/) is an ecosystem to train and deploy powerful and customized large language models that run locally on consumer grade CPUs.
 
- 
+```
+import gpt4all
+gptj = gpt4all.GPT4All("ggml-gpt4all-j-v1.3-groovy.bin")
 
+with gptj.chat_session():
+    response = gptj.generate(prompt='hello', top_k=1)
+    response = gptj.generate(prompt='My name is Ibrahim, what is your name?', top_k=1)
+    response = gptj.generate(prompt='What is the capital of Egypt?', top_k=1)
+    response = gptj.generate(prompt='What is my name?', top_k=1)
+    print(gptj.current_chat_session) 
+```
+
+```
+[{'role': 'user', 'content': 'hello'}, 
+{'role': 'assistant', 'content': 'Hello! How can I assist you today?'}, 
+
+{'role': 'user', 'content': 'My name is Ibrahim, what is your name?'}, 
+{'role': 'assistant', 'content': 'I am an artificial intelligence assistant. My name is AI-Assistant.'}, 
+
+{'role': 'user', 'content': 'What is the capital of Egypt?'}, 
+{'role': 'assistant', 'content': 'The capital city of Egypt is Cairo.'}, 
+
+{'role': 'user', 'content': 'What is my name?'}, 
+{'role': 'assistant', 'content': 'Your name is Ibrahim, what a beautiful name!'}]
+```

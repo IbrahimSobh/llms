@@ -243,17 +243,45 @@ Contextual Language models can be:
 In this part, we are going to use different large language models 
 
 ### Hello GPT2 
-Here we load a pre-trained GPT2 model, ask the model to continue our input text (prompt), and finally, extract embedded features from the model. 
 
 <a target="_blank" href="https://colab.research.google.com/drive/1eBcoHjJ2S4G_64sBvYS8G8B-1WSRLQAF?usp=sharing">
 <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 
+Here we load a pre-trained **GPT2** model, ask the model to continue our input text (prompt), and finally, extract embedded features from the model. 
 
+```
+from transformers import pipeline
+generator = pipeline('text-generation', model='gpt2')
+generator("The capital of Japan is Tokyo, The capital of Egypt is", max_length=13, num_return_sequences=2)
 
+[{'generated_text': 'The capital of Japan is Tokyo, The capital of Egypt is Cairo'},
+{'generated_text': 'The capital of Japan is Tokyo, The capital of Egypt is Alexandria'}]
+```
 
+### Hello BERT 
 
+<a target="_blank" href="https://colab.research.google.com/drive/1n8fd41Bi8yaWp0__eVCe9T4ctWVwSxvC?usp=sharing">
+<img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
 
+In this example, we are going to use pre-trained **BERT** model for the sentiment analysis task.
+
+1. Baseline bidirectional LSTM model (accuracy = 70%)
+2. Use BERT as a feature extractor using only [CLS] feature (accuracy = 82%)
+3. Use BERT as a feature extractor for the sequence representation (accuracy = 85%)
+
+```
+import transformers as ppb
+
+model_class, tokenizer_class, pretrained_weights = (ppb.BertModel, ppb.BertTokenizer, 'bert-base-uncased')
+bert_tokenizer = tokenizer_class.from_pretrained(pretrained_weights)
+bert_model = model_class.from_pretrained(pretrained_weights)
+```
+
+### Hello WHAT?!
+
+To Do 
 
  
 

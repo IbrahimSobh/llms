@@ -4,6 +4,17 @@
 
 ## Introduction: What is a language model?
 
+Simple definition: Language Modeling is the task of predicting what word comes next.
+
+"The dog is playing in the ..."
+- park
+- woods
+- snow
+- office
+- university
+- Neural network
+- ? 
+
 The main purpose of **Language Models** is to assign a probability to a sentence, to distinguish between the more likely and the less likely sentences.
 
 ### Applications of language models:
@@ -18,8 +29,9 @@ For Speech Recognition, we use not only the acoustics model (the speech signal),
 > Sometimes, you hear or read a sentence that is not clear, but using your language model, you still can recognize it at a high accuracy despite the noisy vision/speech input.
 
 The language model computes either of:
-- The probability of a sentence or sequence of words: $P(w_1, w_2, w_3, ..., w_n)$
 - The probability of an upcoming word: $P(w_5 | w_1, w_2, w_3, w_4)$
+- The probability of a sentence or sequence of words (according to the Language Model): $P(w_1, w_2, w_3, ..., w_n)$
+
 
 The Chain Rule: $P(x_1, x_2, x_3, …, x_n) = P(x_1)P(x_2|x_1)P(x_3|x_1,x_2)…P(x_n|x_1,…,x_{n-1})$
 
@@ -32,15 +44,17 @@ What just happened? The Chain Rule is applied to compute the joint probability o
 ## Statistical Language Modeling:
 
 ### n-gram Language Models
-Using a large amount of text (corpus such as Wikipedia), we collect statistics about how frequently different words are, and use these to predict the next word. For example, the probability that a word w comes after these three words *students opened their* can be estimated as follows: 
-- $P(w | students, opened, their) = count of (students, opened, their, w) / count of (students, opened, their)$
+Using a large amount of text (corpus such as Wikipedia), we collect statistics about how frequently different words are, and use these to predict the next word. For example, the probability that a word _w_ comes after these three words *students opened their* can be estimated as follows: 
+- P(w | students opened their) = count(students opened their w) / count(students opened their)
 
 The above example is a 4-gram model. And we may get: 
-- $P(books | students, opened, their) = 0.4$
-- $P(cars | students, opened, their) = 0.05$
-- $P(... | students, opened, their) = ...$
+- P(books | students opened their) = 0.4
+- P(cars | students, opened, their) = 0.05
+- P(... | students, opened, their) = ...
 
 > We can conclude that the word “books” is more probable than “cars” in this context. 
+
+We ignored the previous context before "students opened their"
 
 Accordingly, arbitrary text can be generated from a language model given starting word(s), by sampling from the output probability distribution of the next word, and so on.
 

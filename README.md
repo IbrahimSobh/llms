@@ -182,6 +182,21 @@ LM can be used to generate text conditions on input (speech, image (OCR), text, 
 
 ![clm.png](images/clm.png)
 
+<!--
+- to do [beam search](https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1194/slides/cs224n-2019-lecture08-nmt.pdf)
+-->
+
+- _Greedy decoding_: take the most probable word on each step. Has no way to undo decisions. 
+- _Beam search decoding_: On each step of the decoder, keep track of the k most probable partial _hypotheses_ outputs (eg: translations) where k is the beam size (in practice around 5 to 10), then Backtrack to obtain the full hypothesis. 
+
+Decoding: stopping criterion:
+- _Greedy decoding_: Usually we decode until the model produces a _END_ token.
+- _Beam search decoding_: different hypotheses may produce _END_ tokens on different timesteps, When a hypothesis produces _END_, that hypothesis is complete, Place it aside and continue exploring other hypotheses via beam search. Usually, we continue beam search until:
+1. We reach timestep T (where T is some pre-defined cutoff), or
+2. We have at least n completed hypotheses (where n is pre-defined cutoff)
+
+After we have our list of completed hypotheses, we select the top one with the highest (length normalized) score.
+
 ---
 
 ## Evaluation: How good is our model?

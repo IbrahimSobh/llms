@@ -33,6 +33,9 @@ The language model computes either of:
 - The probability of a sentence or sequence of words (according to the Language Model): $P(w_1, w_2, w_3, ..., w_n)$
 
 
+> Language Modeling is a subcomponent of many NLP tasks, especially those involving generating text or estimating the probability of text.
+
+
 The Chain Rule: $P(x_1, x_2, x_3, …, x_n) = P(x_1)P(x_2|x_1)P(x_3|x_1,x_2)…P(x_n|x_1,…,x_{n-1})$
 
 > $P(The, water, is, so, clear) = P(The) × P(water|The) × P(is|The, water) × P(so|The, water, is) × P(clear | The, water, is, so)$
@@ -68,14 +71,6 @@ Amusing we have a large text corpus (data set like Wikipedia), we can count and 
 - $P(clear |The, water, is, so) = Count (The, water, is, so, clear) / Count (The, water, is, so)$
 -->
 
-Sometimes we do not have enough data to estimate. Increasing n makes sparsity problems worse. Typically we can’t have n bigger than 5.
-- Sparsity problem 1: count(students opened their w) = 0
-Smoothing Solution: Add small 𝛿 to the count for every _w_ in the vocabulary.
-
-- Sparsity problem 2: count(students opened their) = 0
-Backoff Solution:  condition on (opened their) instead.
-
-- Storage issue: Need to store the count for all n-grams you saw in the corpus. Increasing n or increasing corpus increases storage size. 
 
 <!--
 Sparsity: Sometimes we do not have enough data to estimate the following: 
@@ -157,10 +152,10 @@ Try some examples of your own using [Google Books Ngram Viewer](https://books.go
 
 ### Limitations of Statistical Language models
  
-- What if “students opened their” never occurred in data? (Sparsity problem) We may condition on “opened their” instead (_backoff_).
-- What if “students opened their ” never occurred in data? We may add a small 𝛿 to the count for every w (_smoothing_).
-- Large storage requirements: Need to store count for all n-grams you saw in the corpus.
-
+Sometimes we do not have enough data to estimate. Increasing n makes sparsity problems worse. Typically we can’t have n bigger than 5.
+- Sparsity problem 1: count(students opened their w) = 0? Smoothing Solution: Add small 𝛿 to the count for every _w_ in the vocabulary.
+- Sparsity problem 2: count(students opened their) = 0? Backoff Solution:  condition on (opened their) instead.
+- Storage issue: Need to store the count for all n-grams you saw in the corpus. Increasing n or increasing corpus increases storage size. 
 ---
 
 ## Neural Language Models (NLM)
@@ -178,6 +173,14 @@ As depicted, At each step, we have a probability distribution of the next word o
 Disadvantages: 
 - Recurrent computation is _slow_ (sequential, one step at a time)
 - In practice, for long sequences, difficult_ to access information_ from many steps back
+
+
+---
+### Conditional language model
+
+LM can be used to generate text conditions on input (speech, image (OCR), text, etc.) across different applications such as: speech recognition, machine translation, summarization, etc.
+
+![clm.png](images/clm.png)
 
 ---
 
@@ -198,6 +201,7 @@ Disadvantages:
 - **Perplexity** is defined as the inverse probability of a text, according to the Language Model.
 - A good language model should give a lower Perplexity for a test text. Specifically, a lower perplexity for a given text means that text has a high probability in the eyes of that Language Model.
 
+> The standard evaluation metric for Language Models is perplexity
 > Perplexity is the inverse probability of the test set, normalized by the number of words
 
 
@@ -207,9 +211,12 @@ Disadvantages:
 
 > Perplexity is related to branch factor: On average, how many things could occur next.
 
-
+---
 
 ### Transformer-based Language models   
+
+> Instead of RNN, let's use attention
+> Let's use large pre-trained models
 
 - **What is the problem?** One of the biggest challenges in natural language processing (NLP) is the shortage of training data for many distinct tasks. However, modern deep learning-based NLP models improve when trained on millions, or billions, of annotated training examples.
 

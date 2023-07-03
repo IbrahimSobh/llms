@@ -163,15 +163,6 @@ Try some examples of your own using [Google Books Ngram Viewer](https://books.go
 
 ---
 
-## Further readings:
-
-- [Book: Speech and Language Processing; Daniel Jurafsky](https://www.amazon.com/Speech-Language-Processing-Daniel-Jurafsky/dp/0131873210)
-- [Video: Natural Language Processing](https://www.youtube.com/playlist?list=PLQiyVNMpDLKnZYBTUOlSI9mi9wAErFtFm)
-- [Gentle Introduction to Statistical Language Modeling and Neural Language Models](https://machinelearningmastery.com/statistical-language-modeling-and-neural-language-models/)
-
-
----
-
 ## Neural Language Models (NLM)
 
 - **What is the problem?** One of the biggest challenges in natural language processing (NLP) is the shortage of training data for many distinct tasks. However, modern deep learning-based NLP models improve when trained on millions, or billions, of annotated training examples.
@@ -433,4 +424,17 @@ For more models, check [CodeTF](https://github.com/salesforce/CodeTF) from Sales
 - **Dolly**: an instruction-tuned open large language model by Databricks
 - **FastChat-T5**: a chat assistant fine-tuned from FLAN-T5 by LMSYS	
 
+
+--- 
+
+## Chat with your documents 
+to do 
+
+---
+
+## Further readings:
+
+- [Book: Speech and Language Processing; Daniel Jurafsky](https://www.amazon.com/Speech-Language-Processing-Daniel-Jurafsky/dp/0131873210)
+- [Video: Natural Language Processing](https://youtu.be/iWea12EAu6U?list=PLoROMvodv4rOhcuXMZkNm7j3fVwBBY42z)
+- [Gentle Introduction to Statistical Language Modeling and Neural Language Models](https://machinelearningmastery.com/statistical-language-modeling-and-neural-language-models/)
 

@@ -56,7 +56,9 @@ The above example is a 4-gram model. And we may get:
 
 We ignored the previous context before "students opened their"
 
-Accordingly, arbitrary text can be generated from a language model given starting word(s), by sampling from the output probability distribution of the next word, and so on.
+> Accordingly, arbitrary text can be generated from a language model given starting word(s), by sampling from the output probability distribution of the next word, and so on.
+
+We can train an LM on any kind of text, then generate text in that style (Harry Potter, etc.). 
 
 <!--
 ### How to estimate these probabilities?
@@ -66,6 +68,16 @@ Amusing we have a large text corpus (data set like Wikipedia), we can count and 
 - $P(clear |The, water, is, so) = Count (The, water, is, so, clear) / Count (The, water, is, so)$
 -->
 
+Sometimes we do not have enough data to estimate. Increasing n makes sparsity problems worse. Typically we can’t have n bigger than 5.
+- Sparsity problem 1: count(students opened their w) = 0
+Smoothing Solution: Add small 𝛿 to the count for every _w_ in the vocabulary.
+
+- Sparsity problem 2: count(students opened their) = 0
+Backoff Solution:  condition on (opened their) instead.
+
+- Storage issue: Need to store the count for all n-grams you saw in the corpus. Increasing n or increasing corpus increases storage size. 
+
+<!--
 Sparsity: Sometimes we do not have enough data to estimate the following: 
 - $P(clear |The, water, is, so) = Count (The, water, is, so, clear) / Count (The, water, is, so)$
 
@@ -73,11 +85,14 @@ Markov Assumption (Simplifying assumption):
 - $P(clear |The, water, is, so) ≈ P(clear | so)$
 - Or $P(clear |The, water, is, so) ≈ P(clear | is, so)$
 
+
 Formally:
 - $P(w_1 w_2 … w_n ) ≈ ∏i P(w_i | w_{i−k} … w_{i−1})$
 - $P(w_i | w_1 w_2 … w_{i−1}) ≈ P(w_i | w_{i−k} … w_{i−1})$
 - Unigram model: $P(w_1 w_2 … w_n ) ≈ ∏i P(w_i)$
 - Bigram model: $P(w_i | w_1 w_2 … w{i−1}) ≈ P(w_i | w_{i−1})$
+-->
+
 
 > We can extend to trigrams, 4-grams, 5-grams, and N-grams.
 
@@ -140,6 +155,30 @@ Try some examples of your own using [Google Books Ngram Viewer](https://books.go
 ![ngramviewer.png](images/ngramviewer.png)
 -->
 
+### Limitations of Statistical Language models
+ 
+- What if “students opened their” never occurred in data? (Sparsity problem) We may condition on “opened their” instead (_backoff_).
+- What if “students opened their ” never occurred in data? We may add a small 𝛿 to the count for every w (_smoothing_).
+- Large storage requirements: Need to store count for all n-grams you saw in the corpus.
+
+---
+
+## Neural Language Models (NLM)
+
+NLM usually (but not always) uses an RNN to learn sequences of words (sentences, paragraphs, … etc) and hence can predict the next word. 
+
+Advantages: 
+- Can process variable-length input
+- Computations for step t use information from many steps back
+- Model size doesn’t increase for longer input, the same weights are applied on every timestep.
+
+![nlm01.png](images/nlm01.png)
+
+As depicted, At each step, we have a probability distribution of the next word over the vocabulary.
+Disadvantages: 
+- Recurrent computation is _slow_ (sequential, one step at a time)
+- In practice, for long sequences, difficult_ to access information_ from many steps back
+
 ---
 
 ## Evaluation: How good is our model?
@@ -169,35 +208,12 @@ Try some examples of your own using [Google Books Ngram Viewer](https://books.go
 > Perplexity is related to branch factor: On average, how many things could occur next.
 
 
-### Limitations of Statistical Language models
- 
-- What if “students opened their” never occurred in data? (Sparsity problem) We may condition on “opened their” instead (_backoff_).
-- What if “students opened their ” never occurred in data? We may add a small 𝛿 to the count for every w (_smoothing_).
-- Large storage requirements: Need to store count for all n-grams you saw in the corpus.
 
----
-
-## Neural Language Models (NLM)
+### Transformer-based Language models   
 
 - **What is the problem?** One of the biggest challenges in natural language processing (NLP) is the shortage of training data for many distinct tasks. However, modern deep learning-based NLP models improve when trained on millions, or billions, of annotated training examples.
 
 - **Pre-training is the solution:** To help close this gap, a variety of techniques have been developed for training general-purpose language representation models using the enormous amount of unannotated text. The pre-trained model can then be fine-tuned on small data for different tasks like question answering and sentiment analysis, resulting in substantial accuracy improvements compared to training on these datasets from scratch.
-
-NLM usually (but not always) uses an RNN to learn sequences of words (sentences, paragraphs, … etc) and hence can predict the next word. 
-
-Advantages: 
-- Can process variable-length input
-- Computations for step t use information from many steps back
-- Model size doesn’t increase for longer input, the same weights are applied on every timestep.
-
-![nlm01.png](images/nlm01.png)
-
-As depicted, At each step, we have a probability distribution of the next word over the vocabulary.
-Disadvantages: 
-- Recurrent computation is _slow_ (sequential, one step at a time)
-- In practice, for long sequences, difficult_ to access information_ from many steps back
-
-### Transformer-based Language models   
 
 The Transformer architecture was proposed in the paper [Attention is All You Need](https://arxiv.org/abs/1706.03762), used for the Neural Machine Translation task (NMT), consisting of: 
 - **Encoder**: Network that encodes the input sequence.

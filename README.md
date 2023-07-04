@@ -375,6 +375,23 @@ with gptj.chat_session():
 {'role': 'assistant', 'content': 'Your name is Ibrahim, what a beautiful name!'}]
 ```
 
+Try the following models: 
+
+- **Vicuna**: a chat assistant fine-tuned from LLaMA on user-shared conversations by LMSYS
+- **WizardLM**: an instruction-following LLM using evol-instruct by Microsoft
+- **MPT-Chat**: a chatbot fine-tuned from MPT-7B by MosaicML
+- **Orca**: a model, by Microsoft, that learns to imitate the reasoning process of large foundation models (GPT-4), guided by teacher assistance from ChatGPT.
+
+```
+import gpt4all
+model = gpt4all.GPT4All("ggml-vicuna-7b-1.1-q4_2.bin")
+model = gpt4all.GPT4All("ggml-vicuna-13b-1.1-q4_2.bin")
+model = gpt4all.GPT4All("ggml-wizardLM-7B.q4_2.bin")
+model = gpt4all.GPT4All("ggml-mpt-7b-chat.bin")
+model = gpt4all.GPT4All("orca-mini-3b.ggmlv3.q4_0.bin")
+```
+
+
 ### 🚀 Falcon
 
 <a target="_blank" href="https://colab.research.google.com/drive/1bkBWa38-kO9T-8mvI1iXAQCIdOO19Uv2?usp=sharing">
@@ -476,7 +493,8 @@ For more models, check [CodeTF](https://github.com/salesforce/CodeTF) from Sales
 
 🏔️ [Chat with Open Large Language Models](https://chat.lmsys.org/) 
 
-- **Vicuna**: a chat assistant fine-tuned from LLaMA on user-shared conversations by LMSYS	WizardLM: an instruction-following LLM using evol-instruct by Microsoft
+- **Vicuna**: a chat assistant fine-tuned from LLaMA on user-shared conversations by LMSYS
+- **WizardLM**: an instruction-following LLM using evol-instruct by Microsoft
 - **Guanaco**: a model fine-tuned with QLoRA by UW
 - **MPT-Chat**: a chatbot fine-tuned from MPT-7B by MosaicML
 - **Koala**: a dialogue model for academic research by BAIR

@@ -162,7 +162,7 @@ Sometimes we do not have enough data to estimate. Increasing n makes sparsity pr
 
 NLM usually (but not always) uses an RNN to learn sequences of words (sentences, paragraphs, … etc) and hence can predict the next word. 
 
-Advantages: 
+**Advantages: **
 - Can process variable-length input as the computations for step t use information from many steps back (eg: RNN)
 - No sparsity problem (can feed any n-gram not seen in the training data)
 - Model size doesn’t increase for longer input ($W_h, W_e, $), the same weights are applied on every timestep and need to store only the vocabulary word vectors.
@@ -171,12 +171,18 @@ Advantages:
 
 As depicted, At each step, we have a probability distribution of the next word over the vocabulary.
 
-Training a NLM:
+**Training an NLM:**
 1. Use a big corpus of text (a sequence of words such as Wikipedia) 
 2. Feed into the NLM (a batch of sentences); compute output distribution for every step. (predict probability dist of every word, given words so far)
 3. Loss function on each step t cross-entropy between predicted probability distribution, and the true next word (one-hot)
 
-Disadvantages: 
+**Example of long sequence learning:**
+- The writer of the books (_is_ or _are_)? 
+- Correct answer: The writer of the books _is_ planning a sequel
+- **Syntactic recency**: The writer of the books is (_correct_)
+- **Sequential recency**: The writer of the books are (_incorrect_)
+
+**Disadvantages:**
 - Recurrent computation is _slow_ (sequential, one step at a time)
 - In practice, for long sequences, difficult_ to access information_ from many steps back
 

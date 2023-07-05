@@ -509,7 +509,11 @@ For more models, check [CodeTF](https://github.com/salesforce/CodeTF) from Sales
 
 --- 
 
-## Chat with your documents 
+## 🧑 🤖 Chat with your documents 
+
+<a target="_blank" href="https://colab.research.google.com/drive/1DDPhjMiffvWs4gqqD9KyNO-yAp26HavK?usp=sharing">
+<img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
 
 We can use different methods to chat with our documents. No need to fine-tune the whole LLM, instead we can provide the right context along with our question to the pre-trained model and simply get the answers based on our provided documents. 
 1. **Index phase:** Our documents are divided into chunks, extract embeddings per chunk, and save into an embedding database such as [Chroma](https://www.trychroma.com/).

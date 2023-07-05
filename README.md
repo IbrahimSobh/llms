@@ -510,7 +510,48 @@ For more models, check [CodeTF](https://github.com/salesforce/CodeTF) from Sales
 --- 
 
 ## Chat with your documents 
-to do 
+
+We can use different methods to chat with our documents. No need to fine-tune the whole LLM, instead we can provide the right context along with our question to the pre-trained model and simply get the answers based on our provided documents. 
+1. **Index phase:** Our documents are divided into chunks, extract embeddings per chunk, and save into an embedding database such as [Chroma](https://www.trychroma.com/).
+2. **Question answering phase:** Given a question, we use the embedding database to get similar chunks, construct a prompt consisting of the question and the context, and feed this to the LLMs and get our answers.    
+
+Here, We chat with this nice article titled [Transformers without pain 🤗](https://www.linkedin.com/pulse/transformers-without-pain-ibrahim-sobh-phd/) asking questions related to transformers, attention, encoder-decoder, etc. while utilizing the powerful [Palm](https://python.langchain.com/docs/get_started/introduction.html) Model by google and the [LangChain](https://python.langchain.com/docs/get_started/introduction.html) framework for developing applications powered by language models.
+
+```
+# load docs and construct the index
+urls = ['https://www.linkedin.com/pulse/transformers-without-pain-ibrahim-sobh-phd/',]
+loader = WebBaseLoader(urls)
+index = VectorstoreIndexCreator(
+        embedding=GooglePalmEmbeddings(),
+        text_splitter=RecursiveCharacterTextSplitter(chunk_size=1000,
+                                 chunk_overlap=0, separators=[" ", ",", "\n"])).from_loaders([loader])
+
+# QA Retrieval
+qa_retriever = RetrievalQA.from_chain_type(llm=Palm_llm, chain_type="stuff",
+                                    retriever=index.vectorstore.as_retriever(),
+                                    input_key="question")
+```
+
+
+- **Question**: 🧑 'What these documents are about?'
+- **Answer**: 🤖 'The documents are about transformers, which are a type of neural network that has been used successfully in natural language processing and computer vision tasks.'
+
+- **Question**: 🧑 'What is the main idea of transformers?'
+- **Answer**: 🤖 'The main idea of transformers is to use attention mechanisms to model long-range dependencies in sequences.'
+
+- **Question**: 🧑 'What is positional encoding?'
+- **Answer**: 🤖 'Positional encoding is a technique used to represent the order of words in a sequence.'
+
+- **Question**: 🧑 'How query, key, and value vectors are used?'
+- **Answer**: 🤖 'The query vector is used to compute a weighted sum of the values through the keys. Specifically: q dot product all the keys, then softmax to get weights and finally use these weights to compute a weighted sum of the values.'
+
+- **Question**: 🧑 'How to start using transformers?'
+- **Answer**: 🤖 'To start using transformers, you can use the huggingface transformers library. This library provides thousands of pretrained models to perform tasks on texts such as classification, information extraction, question answering, summarization, translation, text generation, etc in 100+ languages.'
+
+
+
+You can try your own documents and questions! 
+
 
 ---
 

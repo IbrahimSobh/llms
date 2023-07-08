@@ -167,7 +167,7 @@ NLM usually (but not always) uses an RNN to learn sequences of words (sentences,
 - No sparsity problem (can feed any n-gram not seen in the training data)
 - Model size doesn’t increase for longer input ($W_h, W_e, $), the same weights are applied on every timestep and need to store only the vocabulary word vectors.
 
-![nlm01.png](images/nlm01.png)
+![nlm01.png](https://camo.githubusercontent.com/623b4dea0b653f2ad3f36c71ebfe749a677ac0a1/68747470733a2f2f6d69726f2e6d656469756d2e636f6d2f6d61782f343030362f312a44304a31674e51663876727255704b657944387750412e706e67)
 
 As depicted, At each step, we have a probability distribution of the next word over the vocabulary.
 

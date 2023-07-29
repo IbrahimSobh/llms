@@ -440,6 +440,52 @@ Daniel: What do you like most about your job?
 Girafatron: I love being the tallest animal in the universe! It's really fulfilling.
 ```
 
+### 🦙 Llama 2 
+[Llama2](https://huggingface.co/blog/llama2) is a family of state-of-the-art open-access large language models released by Meta today, and we’re excited to fully support the launch with comprehensive integration in Hugging Face. Llama 2 is being released with a very permissive community license and is available for commercial use. The code, pretrained models, and fine-tuned models are all being released today 🔥
+
+```
+pip install transformers
+huggingface-cli login
+```
+
+```
+from transformers import AutoTokenizer
+import transformers
+import torch
+
+model = "meta-llama/Llama-2-7b-chat-hf"
+
+tokenizer = AutoTokenizer.from_pretrained(model)
+pipeline = transformers.pipeline(
+    "text-generation",
+    model=model,
+    torch_dtype=torch.float16,
+    device_map="auto",
+)
+
+sequences = pipeline(
+    'I liked "Breaking Bad" and "Band of Brothers". Do you have any recommendations of other shows I might like?\n',
+    do_sample=True,
+    top_k=10,
+    num_return_sequences=1,
+    eos_token_id=tokenizer.eos_token_id,
+    max_length=200,
+)
+for seq in sequences:
+    print(f"Result: {seq['generated_text']}")
+```
+
+```
+Result: I liked "Breaking Bad" and "Band of Brothers". Do you have any recommendations of other shows I might like?
+Answer:
+Of course! If you enjoyed "Breaking Bad" and "Band of Brothers," here are some other TV shows you might enjoy:
+1. "The Sopranos" - This HBO series is a crime drama that explores the life of a New Jersey mob boss, Tony Soprano, as he navigates the criminal underworld and deals with personal and family issues.
+2. "The Wire" - This HBO series is a gritty and realistic portrayal of the drug trade in Baltimore, exploring the impact of drugs on individuals, communities, and the criminal justice system.
+3. "Mad Men" - Set in the 1960s, this AMC series follows the lives of advertising executives on Madison Avenue, expl
+```
+
+
+
 ### 🚀 CodeT5+
 
 <a target="_blank" href="https://colab.research.google.com/drive/1Ik8w6BgHazuf45E5GrZd0vyx6SV3EOzG?usp=sharing">

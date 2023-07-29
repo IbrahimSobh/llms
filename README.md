@@ -162,7 +162,7 @@ Sometimes we do not have enough data to estimate. Increasing n makes sparsity pr
 
 NLM usually (but not always) uses an RNN to learn sequences of words (sentences, paragraphs, … etc) and hence can predict the next word. 
 
-**Advantages: **
+**Advantages:**
 - Can process variable-length input as the computations for step t use information from many steps back (eg: RNN)
 - No sparsity problem (can feed any n-gram not seen in the training data)
 - Model size doesn’t increase for longer input ($W_h, W_e, $), the same weights are applied on every timestep and need to store only the vocabulary word vectors.

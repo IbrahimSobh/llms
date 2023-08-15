@@ -559,6 +559,68 @@ For more models, check [CodeTF](https://github.com/salesforce/CodeTF) from Sales
 
 --- 
 
+## 🧑 Prompt Engineering  
+
+- 👉 **Prompt engineering** is the process of designing the prompts (text input) for a language model to generate the required output. Prompt engineering involves selecting appropriate keywords, providing context, being clear and specific in a way that directs the language model behavior achieving desired responses. Through prompt engineering, we can control a model’s tone, style, length, etc. without fine-tuning. 
+
+- 👉 **Zero-shot learning** involves asking the model to make predictions without providing any examples (zero shot), for example:
+
+```
+Classify the text into neutral, negative or positive. 
+Text: I think the vacation is excellent.
+Sentiment:
+
+Answer: Neutral
+```
+When zero-shot is not good enough, it's recommended to help the model by providing examples in the prompt which leads to few-shot prompting.
+
+- 👉 **Few-shot learning** involves askinf the model while providing a few examples in the prompt, for example:
+
+```
+Text: This is awesome!
+Sentiment: Positive 
+
+Text: This is bad!
+Sentiment: Negative
+
+Text: Wow that movie was rad!
+Sentiment: Positive
+
+Text: What a horrible show!
+Sentiment:  
+
+Answer: Negative
+```
+
+- 👉 **Chain-of-thought ([CoT](https://arxiv.org/abs/2201.11903))** prompting enables complex reasoning capabilities through intermediate reasoning steps. We can combine it with few-shot prompting to get better results on complex tasks that require step by step reasoning before responding.
+
+![cot.png](images/cot.png)
+
+
+In addition to **prompt engineering**, we may consider more options: 
+- Fine-tuning the model on additional data.
+- Retrieval Augmented Generation (RAG) to provide additional external data to the prompt to form enhanced context from archived knowledge sources.
+
+--- 
+
+## 🚀 Fine-tuning LLMs
+
+Fine-tuning LLMs on downstream datasets results in huge performance gains when compared to using the pretrained LLMs out-of-the-box (zero-shot inference, for example). However, as models get larger and larger, full fine-tuning becomes infeasible to train on consumer hardware. In addition, storing and deploying fine-tuned models independently for each downstream task becomes very expensive, because fine-tuned models are the same size as the original pretrained model. Parameter-Efficient Fine-tuning ([PEFT](https://huggingface.co/blog/peft)) approaches are meant to address both problems! PEFT approaches enable you to get performance comparable to full fine-tuning while only having a small number of trainable parameters. For example: 
+
+- 👉 [Prompt Tuning](https://arxiv.org/pdf/2104.08691.pdf): a simple yet effective mechanism for learning “soft prompts” to condition frozen language models to perform specific downstream
+tasks. Just like engineered text prompts, soft prompts are concatenated to the input text. But rather than selecting from existing vocabulary items, the “tokens” of the soft prompt are learnable vectors. This means a soft prompt can be optimized end-to-end over a training dataset, as [shown](https://ai.googleblog.com/2022/02/guiding-frozen-language-models-with.html) below: 
+![pt.png](images/pt.png)
+
+- 👉 **[LoRA](https://arxiv.org/pdf/2106.09685.pdf)** Low-Rank Adaptation of llms is a methid that freezes the pretrained model weights and injects trainable rank decomposition matrices into each layer of the Transformer architecture. Greatly reducing the number of trainable parameters for downstream tasks. The figure below, from this [video](https://youtu.be/PXWYUTMt-AU), explians the main idea: 
+![lora.png](images/lora.png) 
+
+--- 
+
+## 🚀 Retrieval Augmented Generation (RAG)
+
+
+--- 
+
 ## 🧑 🤖 Chat with your documents 
 
 <a target="_blank" href="https://colab.research.google.com/drive/1DDPhjMiffvWs4gqqD9KyNO-yAp26HavK?usp=sharing">

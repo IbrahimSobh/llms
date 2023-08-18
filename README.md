@@ -675,6 +675,34 @@ chat(messages)
 
 ```
 
+- **Prompt templates** are pre-defined recipes for generating prompts for language models. A template may include instructions, few shot examples, and specific context and questions appropriate for a given task.
+
+```
+from langchain import PromptTemplate
+
+prompt_template = PromptTemplate.from_template(
+    "Tell me a {adjective} joke about {content}."
+)
+prompt_template.format(adjective="funny", content="chickens")
+```
+The prompt to Chat Models is a list of chat messages. Each chat message is associated with content, and an additional parameter called role. For example, in the OpenAI Chat Completions API, a chat message can be associated with an AI assistant, a human or a system role.
+
+```
+from langchain.prompts import ChatPromptTemplate
+
+template = ChatPromptTemplate.from_messages([
+    ("system", "You are a helpful AI bot. Your name is {name}."),
+    ("human", "Hello, how are you doing?"),
+    ("ai", "I'm doing well, thanks!"),
+    ("human", "{user_input}"),
+])
+
+messages = template.format_messages(
+    name="Bob",
+    user_input="What is your name?")
+
+```
+
 👉 **🔗 Chains**: Chains go beyond a single LLM call and involve sequences of calls (whether to an LLM or a different utility). LangChain provides a standard interface for chains, lots of integrations with other tools, and end-to-end chains for common applications. Chain very generically can be defined as a sequence of calls to components, which can include other chains.
 ```
 from langchain.llms import OpenAI

@@ -630,7 +630,7 @@ In this case, instead of using LLMs to access its internal knowledge, we use the
 Large language models (LLMs) are emerging as a transformative technology. However, using these LLMs in isolation is often insufficient for creating a truly powerful applications. [LangChain](https://github.com/langchain-ai/langchain) aims to assist in the development of such applications. 
 There are six main areas that LangChain is designed to help with. These are, in increasing order of complexity:
 
-👉 📃 LLMs and Prompts: This includes prompt management, prompt optimization, a generic interface for all LLMs, and common utilities for working with LLMs.
+### 👉 📃 LLMs and Prompts: This includes prompt management, prompt optimization, a generic interface for all LLMs, and common utilities for working with LLMs.
 
 **LLMs and Chat** Models are subtly but importantly different. LLMs in LangChain refer to pure text completion models. The APIs they wrap take a string prompt as input and output a string completion. OpenAI's GPT-3 is implemented as an LLM. Chat models are often backed by LLMs but tuned specifically for having conversations. 
 
@@ -703,7 +703,7 @@ messages = template.format_messages(
 
 ```
 
-👉 **🔗 Chains**: Chains go beyond a single LLM call and involve sequences of calls (whether to an LLM or a different utility). LangChain provides a standard interface for chains, lots of integrations with other tools, and end-to-end chains for common applications. Chain very generically can be defined as a sequence of calls to components, which can include other chains.
+### 👉 **🔗 Chains**: Chains go beyond a single LLM call and involve sequences of calls (whether to an LLM or a different utility). LangChain provides a standard interface for chains, lots of integrations with other tools, and end-to-end chains for common applications. Chain very generically can be defined as a sequence of calls to components, which can include other chains.
 ```
 from langchain.llms import OpenAI
 from langchain.prompts import PromptTemplate
@@ -724,13 +724,125 @@ print(chain.run("colorful socks"))
 Colorful Toes Co.
 ```
 
-👉 📚 Data Augmented Generation: Data Augmented Generation involves specific types of chains that first interact with an external data source to fetch data for use in the generation step. Examples include summarization of long pieces of text and question/answering over specific data sources.
+### 👉 📚 Data Augmented Generation: Data Augmented Generation involves specific types of chains that first interact with an external data source to fetch data for use in the generation step. Examples include question/answering over specific data sources.
 
-👉 🤖 Agents: Agents involve an LLM making decisions about which Actions to take, taking that Action, seeing an Observation, and repeating that until done. LangChain provides a standard interface for agents, a selection of agents to choose from, and examples of end-to-end agents.
+- Document loaders: Load documents from many different sources. For example, there are document loaders for loading a simple .txt file, for loading the text contents of any web page, or even for loading a transcript of a YouTube video.
 
-👉 🧠 Memory: Memory refers to persisting state between calls of a chain/agent. LangChain provides a standard interface for memory, a collection of memory implementations, and examples of chains/agents that use memory.
+```
+from langchain.document_loaders import TextLoader
 
-👉 🧐 Evaluation: [BETA] Generative models are notoriously hard to evaluate with traditional metrics. One new way of evaluating them is using language models themselves to do the evaluation. LangChain provides some prompts/chains for assisting in this.
+loader = TextLoader("./index.md")
+loader.load()
+``` 
+ 
+- Document transformers: Split documents, convert documents into Q&A format, drop redundant documents, and more
+
+```
+# This is a long document we can split up.
+with open('../../state_of_the_union.txt') as f:
+    state_of_the_union = f.read()
+
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+
+text_splitter = RecursiveCharacterTextSplitter(
+    # Set a really small chunk size, just to show.
+    chunk_size = 100,
+    chunk_overlap  = 20,
+    length_function = len,
+    add_start_index = True,
+)
+
+texts = text_splitter.create_documents([state_of_the_union])
+print(texts[0])
+print(texts[1])
+
+
+# page_content='Madam Speaker, Madam Vice President, our First Lady and Second Gentleman. Members of Congress and' metadata={'start_index': 0}
+#page_content='of Congress and the Cabinet. Justices of the Supreme Court. My fellow Americans.' metadata={'start_index': 82}
+
+```
+
+- Text embedding models: Take text and turn it into a list of floating point numbers (vectrors). There are lots of embedding model providers (OpenAI, Cohere, Hugging Face, etc) - this class is designed to provide a standard interface for all of them.
+
+```
+from langchain.embeddings import OpenAIEmbeddings
+embeddings_model = OpenAIEmbeddings(openai_api_key="...")
+
+embeddings = embeddings_model.embed_documents(
+    [
+        "Hi there!",
+        "Oh, hello!",
+        "What's your name?",
+        "My friends call me World",
+        "Hello World!"
+    ]
+)
+
+```
+  
+- Vector stores: Store and search over embedded data. One of the most common ways to store and search over unstructured data is to embed it and store the resulting embedding vectors, and then at query time to embed the unstructured query and retrieve the embedding vectors that are 'most similar' to the embedded query. A vector store takes care of storing embedded data and performing vector search for you.
+
+```
+from langchain.document_loaders import TextLoader
+from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.text_splitter import CharacterTextSplitter
+from langchain.vectorstores import Chroma
+
+# Load the document, split it into chunks, embed each chunk and load it into the vector store.
+raw_documents = TextLoader('../../../state_of_the_union.txt').load()
+text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
+documents = text_splitter.split_documents(raw_documents)
+db = Chroma.from_documents(documents, OpenAIEmbeddings())
+
+```
+
+Similarity search
+```
+query = "What did the president say about Ketanji Brown Jackson"
+docs = db.similarity_search(query)
+print(docs[0].page_content)
+
+#    Tonight. I call on the Senate to: Pass the Freedom to Vote Act. Pass the John Lewis Voting Rights Act. And while you’re at it, pass the Disclose Act so Americans can know who is funding our elections.
+#    One of the most serious constitutional responsibilities a President has is nominating someone to serve on the United States Supreme Court.
+#    And I did that 4 days ago, when I nominated Circuit Court of Appeals Judge Ketanji Brown Jackson. One of our nation’s top legal minds, who will continue Justice Breyer’s legacy of excellence.
+```
+  
+- Retrievers: Query your data. A retriever is an interface that returns documents given an unstructured query. It is more general than a vector store. A retriever does not need to be able to store documents, only to return (or retrieve) it. Vector stores can be used as the backbone of a retriever, but there are other types of retrievers as well.
+
+'''
+# Let's walk through this in code
+documents = loader.load()
+
+#Next, we will split the documents into chunks.
+from langchain.text_splitter import CharacterTextSplitter
+text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
+texts = text_splitter.split_documents(documents)
+
+# We will then select which embeddings we want to use.
+from langchain.embeddings import OpenAIEmbeddings
+embeddings = OpenAIEmbeddings()
+
+# We now create the vectorstore to use as the index.
+from langchain.vectorstores import Chroma
+db = Chroma.from_documents(texts, embeddings)
+
+# So that's creating the index. Then, we expose this index in a retriever interface.
+retriever = db.as_retriever()
+
+# Then, as before, we create a chain and use it to answer questions!
+qa = RetrievalQA.from_chain_type(llm=OpenAI(), chain_type="stuff", retriever=retriever)
+query = "What did the president say about Ketanji Brown Jackson"
+qa.run(query)
+
+#     " The President said that Judge Ketanji Brown Jackson is one of the nation's top legal minds, a former top litigator in private practice, a former federal public defender, and from a family of public school educators and police officers. He said she is a consensus builder and has received a broad range of support from organizations such as the Fraternal Order of Police and former judges appointed by Democrats and Republicans."
+'''
+  
+
+### 👉 🤖 Agents: Agents involve an LLM making decisions about which Actions to take, taking that Action, seeing an Observation, and repeating that until done. LangChain provides a standard interface for agents, a selection of agents to choose from, and examples of end-to-end agents.
+
+### 👉 🧠 Memory: Memory refers to persisting state between calls of a chain/agent. LangChain provides a standard interface for memory, a collection of memory implementations, and examples of chains/agents that use memory.
+
+### 👉 🧐 Evaluation: [BETA] Generative models are notoriously hard to evaluate with traditional metrics. One new way of evaluating them is using language models themselves to do the evaluation. LangChain provides some prompts/chains for assisting in this.
 
 --- 
 

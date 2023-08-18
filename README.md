@@ -958,7 +958,10 @@ You can try your own documents and questions!
 ---
 ### 📢 Ask almost everything (txt, pdf, video, etc.) 
 
-Check out these simple tutorials: How to get answers from **text** documents, **pdf** files, and even **YouTube** videos using [Chroma](https://www.trychroma.com/) vector database, [PaLM](https://blog.google/technology/ai/google-palm-2-ai-large-language-model/) llm by Google, and a question answering chain from [LangChain](https://python.langchain.com/docs/get_started/introduction.html). Finally, use [Streamlit](https://streamlit.io/) to develop and host the web application. You will need to use your google_api_key (you can get one from Google).
+In these simple tutorials: How to get answers from **text** documents, **pdf** files, and even **YouTube** videos using [Chroma](https://www.trychroma.com/) vector database, [PaLM](https://blog.google/technology/ai/google-palm-2-ai-large-language-model/) llm by Google, and a question answering chain from [LangChain](https://python.langchain.com/docs/get_started/introduction.html). Finally, use [Streamlit](https://streamlit.io/) to develop and host the web application. You will need to use your google_api_key (you can get one from Google). Ths system [architecture](https://blog.streamlit.io/langchain-tutorial-4-build-an-ask-the-doc-app/) is as follows:
+
+![lc01.png](images/lc01.png)
+
 
 - [Ask YouTube](https://askyoutube-djl4xfut5yj.streamlit.app/)
   

@@ -629,19 +629,80 @@ In this case, instead of using LLMs to access its internal knowledge, we use the
 ##  🦜️🔗 LangChain
 Large language models (LLMs) are emerging as a transformative technology. However, using these LLMs in isolation is often insufficient for creating a truly powerful applications. [LangChain](https://github.com/langchain-ai/langchain) aims to assist in the development of such applications. 
 There are six main areas that LangChain is designed to help with. These are, in increasing order of complexity:
-📃 LLMs and Prompts:
 
-This includes prompt management, prompt optimization, a generic interface for all LLMs, and common utilities for working with LLMs.
+👉 📃 LLMs and Prompts: This includes prompt management, prompt optimization, a generic interface for all LLMs, and common utilities for working with LLMs.
 
-🔗 Chains: Chains go beyond a single LLM call and involve sequences of calls (whether to an LLM or a different utility). LangChain provides a standard interface for chains, lots of integrations with other tools, and end-to-end chains for common applications.
+**LLMs and Chat** Models are subtly but importantly different. LLMs in LangChain refer to pure text completion models. The APIs they wrap take a string prompt as input and output a string completion. OpenAI's GPT-3 is implemented as an LLM. Chat models are often backed by LLMs but tuned specifically for having conversations. 
 
-📚 Data Augmented Generation: Data Augmented Generation involves specific types of chains that first interact with an external data source to fetch data for use in the generation step. Examples include summarization of long pieces of text and question/answering over specific data sources.
+- **LLM:** There are lots of LLM providers (OpenAI, Cohere, Hugging Face, etc) - the LLM class is designed to provide a standard interface for all of them.
 
-🤖 Agents: Agents involve an LLM making decisions about which Actions to take, taking that Action, seeing an Observation, and repeating that until done. LangChain provides a standard interface for agents, a selection of agents to choose from, and examples of end-to-end agents.
+```
+pip install openai
+export OPENAI_API_KEY="..."
+from langchain.llms import OpenAI
 
-🧠 Memory: Memory refers to persisting state between calls of a chain/agent. LangChain provides a standard interface for memory, a collection of memory implementations, and examples of chains/agents that use memory.
+llm = OpenAI(openai_api_key="...")
 
-🧐 Evaluation: [BETA] Generative models are notoriously hard to evaluate with traditional metrics. One new way of evaluating them is using language models themselves to do the evaluation. LangChain provides some prompts/chains for assisting in this.
+llm("Tell me a joke")
+# 'Why did the chicken cross the road?\n\nTo get to the other side.'
+```
+
+You can also access provider specific information that is returned. This information is NOT standardized across providers.
+
+```
+llm_result.llm_output
+
+    {'token_usage': {'completion_tokens': 3903,
+      'total_tokens': 4023,
+      'prompt_tokens': 120}}
+```
+
+- **Chat models**: Rather than expose a "text in, text out" API, Chat models expose an interface where "chat messages" are the inputs and outputs. Most of the time, you'll just be dealing with HumanMessage, AIMessage, and SystemMessage.
+  
+
+```
+from langchain.chat_models import ChatOpenAI
+
+chat = ChatOpenAI()
+
+messages = [
+    SystemMessage(content="You are a helpful assistant that translates English to French."),
+    HumanMessage(content="I love programming.")
+]
+chat(messages)
+
+# AIMessage(content="J'aime programmer.", additional_kwargs={})
+
+```
+
+👉 **🔗 Chains**: Chains go beyond a single LLM call and involve sequences of calls (whether to an LLM or a different utility). LangChain provides a standard interface for chains, lots of integrations with other tools, and end-to-end chains for common applications. Chain very generically can be defined as a sequence of calls to components, which can include other chains.
+```
+from langchain.llms import OpenAI
+from langchain.prompts import PromptTemplate
+# To use the LLMChain, first create a prompt template.
+llm = OpenAI(temperature=0.9)
+prompt = PromptTemplate(
+    input_variables=["product"],
+    template="What is a good name for a company that makes {product}?",)
+
+# We can now create a very simple chain that will take user input, format the prompt with it, and then send it to the LLM.
+from langchain.chains import LLMChain
+chain = LLMChain(llm=llm, prompt=prompt)
+
+# Run the chain only specifying the input variable.
+print(chain.run("colorful socks"))
+
+# Result
+Colorful Toes Co.
+```
+
+👉 📚 Data Augmented Generation: Data Augmented Generation involves specific types of chains that first interact with an external data source to fetch data for use in the generation step. Examples include summarization of long pieces of text and question/answering over specific data sources.
+
+👉 🤖 Agents: Agents involve an LLM making decisions about which Actions to take, taking that Action, seeing an Observation, and repeating that until done. LangChain provides a standard interface for agents, a selection of agents to choose from, and examples of end-to-end agents.
+
+👉 🧠 Memory: Memory refers to persisting state between calls of a chain/agent. LangChain provides a standard interface for memory, a collection of memory implementations, and examples of chains/agents that use memory.
+
+👉 🧐 Evaluation: [BETA] Generative models are notoriously hard to evaluate with traditional metrics. One new way of evaluating them is using language models themselves to do the evaluation. LangChain provides some prompts/chains for assisting in this.
 
 --- 
 

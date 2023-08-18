@@ -628,7 +628,13 @@ In this case, instead of using LLMs to access its internal knowledge, we use the
 
 ##  🦜️🔗 LangChain
 Large language models (LLMs) are emerging as a transformative technology. However, using these LLMs in isolation is often insufficient for creating a truly powerful applications. [LangChain](https://github.com/langchain-ai/langchain) aims to assist in the development of such applications. 
+
+![lc02.png](images/lc02.png) 
+
+
 There are six main areas that LangChain is designed to help with. These are, in increasing order of complexity:
+
+
 
 ### 👉 📃 LLMs and Prompts: 
 

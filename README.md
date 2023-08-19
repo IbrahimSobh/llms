@@ -601,6 +601,10 @@ In addition to **prompt engineering**, we may consider more options:
 - Fine-tuning the model on additional data.
 - Retrieval Augmented Generation (RAG) to provide additional external data to the prompt to form enhanced context from archived knowledge sources.
 
+
+
+👉 For more prompt engineering information, see the [Prompt Engineering Guide](https://github.com/dair-ai/Prompt-Engineering-Guide) that contains all the latest papers, learning guides, lectures, references, and tools.
+
 --- 
 
 ## 🚀 Fine-tuning LLMs

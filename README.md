@@ -559,7 +559,7 @@ For more models, check [CodeTF](https://github.com/salesforce/CodeTF) from Sales
 
 --- 
 
-## 🧑 Prompt Engineering  
+## 🧑 📝 Prompt Engineering  
 
 - 👉 **Prompt engineering** is the process of designing the prompts (text input) for a language model to generate the required output. Prompt engineering involves selecting appropriate keywords, providing context, being clear and specific in a way that directs the language model behavior achieving desired responses. Through prompt engineering, we can control a model’s tone, style, length, etc. without fine-tuning. 
 

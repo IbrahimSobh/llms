@@ -574,7 +574,7 @@ Answer: Positive
 ```
 When zero-shot is not good enough, it's recommended to help the model by providing examples in the prompt which leads to few-shot prompting.
 
-- 👉 **Few-shot learning** involves askinf the model while providing a few examples in the prompt, for example:
+- 👉 **Few-shot learning** involves asking the model while providing a few examples in the prompt, for example:
 
 ```
 Text: This is awesome!

@@ -570,7 +570,7 @@ Classify the text into neutral, negative or positive.
 Text: I think the vacation is excellent.
 Sentiment:
 
-Answer: Neutral
+Answer: Positive
 ```
 When zero-shot is not good enough, it's recommended to help the model by providing examples in the prompt which leads to few-shot prompting.
 
@@ -589,7 +589,7 @@ Sentiment: Positive
 Text: What a horrible show!
 Sentiment:  
 
-Answer: Positive
+Answer: Negative
 ```
 
 - 👉 **Chain-of-thought ([CoT](https://arxiv.org/abs/2201.11903))** prompting enables complex reasoning capabilities through intermediate reasoning steps. We can combine it with few-shot prompting to get better results on complex tasks that require step by step reasoning before responding.

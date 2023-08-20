@@ -615,7 +615,7 @@ Fine-tuning LLMs on downstream datasets results in huge performance gains when c
 tasks. Just like engineered text prompts, soft prompts are concatenated to the input text. But rather than selecting from existing vocabulary items, the “tokens” of the soft prompt are learnable vectors. This means a soft prompt can be optimized end-to-end over a training dataset, as [shown](https://ai.googleblog.com/2022/02/guiding-frozen-language-models-with.html) below: 
 ![pt.png](images/pt.png)
 
-- 👉 **[LoRA](https://arxiv.org/pdf/2106.09685.pdf)** Low-Rank Adaptation of llms is a methid that freezes the pretrained model weights and injects trainable rank decomposition matrices into each layer of the Transformer architecture. Greatly reducing the number of trainable parameters for downstream tasks. The figure below, from this [video](https://youtu.be/PXWYUTMt-AU), explians the main idea: 
+- 👉 **[LoRA](https://arxiv.org/pdf/2106.09685.pdf)** Low-Rank Adaptation of llms is a method that freezes the pretrained model weights and injects trainable rank decomposition matrices into each layer of the Transformer architecture. Greatly reducing the number of trainable parameters for downstream tasks. The figure below, from this [video](https://youtu.be/PXWYUTMt-AU), explians the main idea: 
 ![lora.png](images/lora.png) 
 
 --- 

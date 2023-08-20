@@ -589,7 +589,7 @@ Sentiment: Positive
 Text: What a horrible show!
 Sentiment:  
 
-Answer: Negative
+Answer: Positive
 ```
 
 - 👉 **Chain-of-thought ([CoT](https://arxiv.org/abs/2201.11903))** prompting enables complex reasoning capabilities through intermediate reasoning steps. We can combine it with few-shot prompting to get better results on complex tasks that require step by step reasoning before responding.

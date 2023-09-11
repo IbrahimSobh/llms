@@ -4,6 +4,23 @@
 ![lms.png](images/lms.png)
 _Source_ [A Survey of Large Language Models](https://arxiv.org/pdf/2303.18223.pdf)
 
+## Content
+- What is a language model?
+- Applications of language models
+- Statistical Language Modeling
+- Neural Language Models (NLM)
+- Conditional language model
+- Evaluation: How good is our model?
+- Transformer-based Language models
+- Practical LLMs: GPT, BERT, Falcon, Llama, CodeT5
+- Prompt Engineering
+- Fine-tuning LLMs
+- Retrieval Augmented Generation (RAG)
+- Ask almost everything (txt, pdf, video, etc.)
+- LLMs for Computer vision (TBD) 
+- Further readings
+
+
 ---
 
 ## Introduction: What is a language model?
@@ -981,6 +998,10 @@ In these simple tutorials: How to get answers from **text** documents, **pdf** f
 - [Ask Pdf](https://askpdf-6ybdiy0fj3h.streamlit.app/)
   
 ![askpdf.png](images/askpdf.png)
+
+---
+
+## LLMs for Computer vision (TBD) 
 
 ---
 

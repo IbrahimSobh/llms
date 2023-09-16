@@ -17,6 +17,7 @@ _Source_ [A Survey of Large Language Models](https://arxiv.org/pdf/2303.18223.pd
 - Fine-tuning LLMs
 - Retrieval Augmented Generation (RAG)
 - Ask almost everything (txt, pdf, video, etc.)
+- Evaluating LLM-based systems
 - AI Agents
 - LLMs for Computer vision (TBD) 
 - Further readings
@@ -999,7 +1000,7 @@ In these simple tutorials: How to get answers from **text** documents, **pdf** f
 
 --- 
 
-## 👉 🧐 Evaluating an LLM-based system 
+## 👉 🧐 Evaluating LLM-based systems 
 
 There's a difference between evaluating an LLM versus evaluating an LLM-based system. Typically after _generic_ pre-training, LLMs are evaluated on standard benchmarks: 
 - [GLUE](https://gluebenchmark.com/) A benchmark of nine sentence, or sentence-pair language understanding tasks.

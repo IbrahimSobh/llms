@@ -17,6 +17,7 @@ _Source_ [A Survey of Large Language Models](https://arxiv.org/pdf/2303.18223.pd
 - Fine-tuning LLMs
 - Retrieval Augmented Generation (RAG)
 - Ask almost everything (txt, pdf, video, etc.)
+- AI Agents
 - LLMs for Computer vision (TBD) 
 - Further readings
 
@@ -998,6 +999,43 @@ In these simple tutorials: How to get answers from **text** documents, **pdf** f
 - [Ask Pdf](https://askpdf-6ybdiy0fj3h.streamlit.app/)
   
 ![askpdf.png](images/askpdf.png)
+
+
+---
+
+## 🕵️ AI Agents  
+
+- AI agents use an LLM to determine which actions to take and in what order to complete a task.  
+- An action can either be using a tool and observing its output, or returning a response to the user.
+- Tools are functions that an agent calls. Examples of tools include APIs, databases, search engines, LLMs, other agents, etc.
+
+💡 The core idea of agents is to use an LLM to choose a sequence of actions to take. In chains, a sequence of actions is hardcoded (in code). In agents, a language model is used as a reasoning engine to determine which actions to take and in which order.
+
+This [code](https://python.langchain.com/docs/integrations/toolkits/csv) shows how to use agents to interact with data in CSV format. It is mostly optimized for question answering.  
+
+![aiagents01.png](images/aiagents01.png)
+
+### ChatGPT plugins
+
+[ChatGPT plugins](https://openai.com/blog/chatgpt-plugins) are tools designed to help ChatGPT access up-to-date information, run computations, or use third-party services. 
+
+![ChatGPTplugins.png](images/ChatGPTplugins.png)
+
+
+Examples of extending the power of ChatGPT:
+
+👉 By creating and editing diagrams via [Show Me Diagrams](https://www.whatplugin.ai/plugins/show-me-diagrams)
+
+![aiagentdigrams.jpg  ](images/aiagentdigrams.jpg)
+  
+👉 By accessing the power of mathematics provided by [Wolfram](https://www.wolfram.com/wolfram-plugin-chatgpt/)
+
+![aiagentsmath.png](images/aiagentsmath.png)
+
+👉 By allowing you to connect applications, services and tools together, leading to automating your life. The [Zapier plugin](https://zapier.com/blog/announcing-zapier-chatgpt-plugin/) connects you with 100s of online services such as email, social media, cloud storage, and more.
+
+![aiagentszapier.png](images/aiagentszapier.png)
+  
 
 ---
 

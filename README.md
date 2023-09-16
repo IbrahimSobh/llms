@@ -1046,7 +1046,13 @@ Given two texts (true and predicted answers), an LLM can, in theory, find whethe
 
 - 👉 Once we have an eval dataset, a **hyperparameter optimisation** approach makes sens and can be applied across different models, prompts, etc.
 
+
 For more, this [article](https://wandb.ai/ayush-thakur/llm-eval-sweep/reports/How-to-Evaluate-Compare-and-Optimize-LLM-Systems--Vmlldzo0NzgyMTQz) provides an interactive look into how to go about evaluating your large language model (LLM) systems.  
+
+
+[ragas](https://github.com/explodinggradients/ragas) is a framework that helps you evaluate your Retrieval Augmented Generation (RAG) pipelines. RAG denotes a class of LLM applications that use external data to augment the LLM’s context. There are existing tools and frameworks that help you build these pipelines but evaluating it and quantifying your pipeline performance can be hard. This is where ragas (RAG Assessment) comes in.
+
+![ragas.png](images/ragas.png)
 
 ---
 

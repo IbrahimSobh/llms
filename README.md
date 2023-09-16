@@ -929,10 +929,6 @@ conversation({"question": "hi"})
 
 ```
 
-### 👉 🧐 Evaluation: 
-Generative models are notoriously hard to evaluate with traditional metrics. One new way of evaluating them is using language models themselves to do the evaluation. LangChain provides some prompts/chains for assisting in this.
-
-
 --- 
 
 ## 🧑 🤖 Ask your documents 
@@ -1000,6 +996,63 @@ In these simple tutorials: How to get answers from **text** documents, **pdf** f
   
 ![askpdf.png](images/askpdf.png)
 
+
+--- 
+
+## 👉 🧐 Evaluating an LLM-based system 
+
+There's a difference between evaluating an LLM versus evaluating an LLM-based system. Typically after _generic_ pre-training, LLMs are evaluated on standard benchmarks: 
+- [GLUE](https://gluebenchmark.com/) A benchmark of nine sentence, or sentence-pair language understanding tasks.
+- [SQuAD 2.0](https://rajpurkar.github.io/SQuAD-explorer/) A reading comprehension dataset, consisting of questions posed by crowdworkers on a set of Wikipedia articles, where the answer to every question is a segment of text, or span, from the corresponding reading passage, or the question might be unanswerable. 
+- [SNLI](https://nlp.stanford.edu/projects/snli/) A collection of 570k human-written English sentence pairs manually labeled for balanced classification with the labels entailment, contradiction, and neutral. 
+- etc.
+
+LLMs systems can summarize text, do question-answering, find the sentiment of a text, can do translation, and more.  Based on the system, evaluation can be as follows: 
+
+- As a good proof of concepthave, we can examine manually a few inputs and expected responses, where we tune and build the system by trying different components, prompt, etc. However, the systems must be evaluated thoroughly.
+- Create an evaluation dataset on our proivate data. A hyperparameter optimisation approach makes sense when we have an eval dataset, can be applied across different models, prompts, etc. However, this approach is the usually comes at a high cost. 
+  
+### LLMs Evaluating LLMs
+
+- Use an LLM to generate test cases and then evaluate the LLM-based system on them. 
+
+For example in case of question answering system, we need pairs of questions and answers in our evaluation set. We can use human annotators to create gold-standard pairs of questions and answers manually. However, it is costly and time-consuming. One feasible way of creating such a dataset is to leverage an LLM. 
+
+```
+You are a smart assistant designed to come up with meaninful question and answer pair. The question should be to the point and the answer should be as detailed as possible.
+Given a piece of text, you must come up with a question and answer pair that can be used to evaluate a QA bot. Do not make up stuff. Stick to the text to come up with the question and answer pair.
+When coming up with this question/answer pair, you must respond in the following format:
+```
+{{
+    "question": "$YOUR_QUESTION_HERE",
+    "answer": "$THE_ANSWER_HERE"
+}}
+```
+
+
+Everything between the ``` must be valid json.
+
+
+Please come up with a question/answer pair, in the specified JSON format, for the following text:
+----------------
+{text}
+
+```
+
+
+
+
+
+<!---
+Generative models are notoriously hard to evaluate with traditional metrics. One new way of evaluating them is using language models themselves to do the evaluation. LangChain provides some prompts/chains for assisting in this.
+--->
+
+- Use an LLM to find how well the prediction is compared to the true answer
+Given two texts (true and predicted answers), an LLM can, in theory, find whether they are semantically identical. Langchain has a chain called $QAEvalChain$ that can take in a question and "true" answer along with the predicted answer and output "CORRECT" or "INCORRECT" labels.
+
+- Moreover, we can use standard metrics for evaluation such as recall, precision and F1 Score. 
+
+For more, This [article](https://wandb.ai/ayush-thakur/llm-eval-sweep/reports/How-to-Evaluate-Compare-and-Optimize-LLM-Systems--Vmlldzo0NzgyMTQz) provides an interactive look into how to go about evaluating your large language model (LLM) systems.  
 
 ---
 

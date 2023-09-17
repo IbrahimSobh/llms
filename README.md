@@ -13,7 +13,7 @@ _Source_ [A Survey of Large Language Models](https://arxiv.org/pdf/2303.18223.pd
 - Evaluation: How good is our model?
 - Transformer-based Language models
 - Practical LLMs: GPT, BERT, Falcon, Llama, CodeT5
-- How to generate textusing different decoding methods
+- How to generate text using different decoding methods
 - Prompt Engineering
 - Fine-tuning LLMs
 - Retrieval Augmented Generation (RAG)
@@ -581,7 +581,7 @@ For more models, check [CodeTF](https://github.com/salesforce/CodeTF) from Sales
 
 --- 
 
-## 🤗 How to generate textusing different decoding methods
+## 🤗 How to generate text using different decoding methods
 
 - 👉 𝐆𝐫𝐞𝐞𝐝𝐲 𝐬𝐞𝐚𝐫𝐜𝐡 is the simplest decoding method. It selects the word with the highest probability as its next word. The major drawback of greedy search though is that it misses high probability words hidden behind a low probability word.
 - 👉 𝐁𝐞𝐚𝐦 𝐬𝐞𝐚𝐫𝐜𝐡 reduces the risk of missing hidden high probability word sequences by keeping the most likely num_beams of hypotheses at each time step and eventually choosing the hypothesis that has the overall highest probability.

@@ -1053,7 +1053,7 @@ There's a difference between evaluating an LLM versus evaluating an LLM-based sy
 
 LLMs systems can summarize text, do question-answering, find the sentiment of a text, can do translation, and more.  Based on the system, evaluation can be as follows: 
 
-- As a good proof of concepthave, we can examine manually a few inputs and expected responses, where we tune and build the system by trying different components, prompt, etc. However, the systems must be evaluated thoroughly.
+- As a good proof of concept, we can examine manually a few inputs and expected responses, where we tune and build the system by trying different components, prompt, etc. However, the systems must be evaluated thoroughly.
 - Create an evaluation dataset on our proivate data. However, this approach is the usually comes at a high cost. 
   
 ### LLMs Evaluating LLMs

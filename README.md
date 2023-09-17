@@ -585,14 +585,20 @@ For more models, check [CodeTF](https://github.com/salesforce/CodeTF) from Sales
 
 - 👉 𝐆𝐫𝐞𝐞𝐝𝐲 𝐬𝐞𝐚𝐫𝐜𝐡 is the simplest decoding method. It selects the word with the highest probability as its next word. The major drawback of greedy search though is that it misses high probability words hidden behind a low probability word.
 - 👉 𝐁𝐞𝐚𝐦 𝐬𝐞𝐚𝐫𝐜𝐡 reduces the risk of missing hidden high probability word sequences by keeping the most likely num_beams of hypotheses at each time step and eventually choosing the hypothesis that has the overall highest probability.
-- ✅ Beam search will always find an output sequence with higher probability than greedy search, but is not guaranteed to find the most likely output.
-- 💡 In transformers, we simply set the parameter num_return_sequences to the number of highest scoring beams that should be returned. Make sure though that num_return_sequences <= num_beams!
-- ✅ Beam search can work very well in tasks where the length of the desired generation is more or less predictable as in machine translation or summarization. 🟥But this is not the case for open-ended generation where the desired output length can vary greatly, e.g. dialog and story generation. beam search heavily suffers from repetitive generation. As humans, we want generated text to surprise us and not to be boring/predictable (🟥Beam search is less surprising)
+
+✅ Beam search will always find an output sequence with higher probability than greedy search, but is not guaranteed to find the most likely output.
+
+💡 In transformers, we simply set the parameter num_return_sequences to the number of highest scoring beams that should be returned. Make sure though that num_return_sequences <= num_beams!
+
+✅ Beam search can work very well in tasks where the length of the desired generation is more or less predictable as in machine translation or summarization. 🟥But this is not the case for open-ended generation where the desired output length can vary greatly, e.g. dialog and story generation. beam search heavily suffers from repetitive generation. As humans, we want generated text to surprise us and not to be boring/predictable (🟥Beam search is less surprising)
 
 - 👉 𝐒𝐚𝐦𝐩𝐥𝐢𝐧𝐠 means randomly picking the next word according to its conditional probability distribution. Sampling is not deterministic anymore.
-- 💡 In transformers, we set do_sample=True and deactivate Top-K sampling (more on this later) via top_k=0.
-- 👉 𝐓𝐨𝐩-𝐊 𝐬𝐚𝐦𝐩𝐥𝐢𝐧𝐠: the K most likely next words are filtered and the probability mass is redistributed among only those K next words. GPT2 adopted this sampling scheme.
-- 👉 𝐓𝐨𝐩-𝐩 𝐬𝐚𝐦𝐩𝐥𝐢𝐧𝐠: Instead of sampling only from the most likely K words, in Top-p sampling chooses from the smallest possible set of words whose cumulative probability exceeds the probability p. The probability mass is then redistributed among this set of words. Having set p=0.92, Top-p sampling picks the minimum number of words to exceed together 92% of the probability mass.
+
+💡 In transformers, we set do_sample=True and deactivate Top-K sampling (more on this later) via top_k=0.
+
+👉 𝐓𝐨𝐩-𝐊 𝐬𝐚𝐦𝐩𝐥𝐢𝐧𝐠: the K most likely next words are filtered and the probability mass is redistributed among only those K next words. GPT2 adopted this sampling scheme.
+
+👉 𝐓𝐨𝐩-𝐩 𝐬𝐚𝐦𝐩𝐥𝐢𝐧𝐠: Instead of sampling only from the most likely K words, in Top-p sampling chooses from the smallest possible set of words whose cumulative probability exceeds the probability p. The probability mass is then redistributed among this set of words. Having set p=0.92, Top-p sampling picks the minimum number of words to exceed together 92% of the probability mass.
 
 ```
 # set top_k = 50 and set top_p = 0.95 and num_return_sequences = 3
@@ -606,13 +612,11 @@ sample_outputs = model.generate(
 )
 ```
 
-- ✅ While Top-p seems more elegant than Top-K, both methods work well in practice. Top-p can also be used in combination with Top-K, which can avoid very low ranked words while allowing for some dynamic selection.
+✅ While Top-p seems more elegant than Top-K, both methods work well in practice. Top-p can also be used in combination with Top-K, which can avoid very low ranked words while allowing for some dynamic selection.
 
 ![topktopp.png](images/topktopp.png) 
 
 ✅ As ad-hoc decoding methods, top-p and top-K sampling seem to produce more fluent text than traditional greedy - and beam search on open-ended language generation.
-
-
 
 For more, kindly see this blog: [How to generate text: using different decoding methods](https://huggingface.co/blog/how-to-generate#:~:text=Instead%20of%20sampling%20only%20from,among%20this%20set%20of%20words.)
 ---

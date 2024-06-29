@@ -13,7 +13,7 @@ LLMs are mostly used in zero-shot mode, prompting a model to generate an output 
 This code is the first step of using LangGraph to bulid generic and simple graphs even without LLMs.
 
 
-## 1) LangGrpah, minimal code, without AI
+## 1) LangGraph, minimal code, without AI
 
 ![lms.png](images/guess.png)
 
@@ -141,6 +141,8 @@ tools = [
 
     ]
 ```
+
+![lms.png](images/Tools.png)
 
 Now let's see how our agent is going to answer our questions and use the provided tools: 
 

@@ -187,6 +187,10 @@ The code implements the following:
 - AI Python developer: Generates Python code given text, and returns results (charts)
 - AI Researcher: An agent that breaks down a complex question into a series of simpler / follow up questions. This agent uses a search tool to look up answers to the simpler questions in order to answer the original complex question.
 
+<a target="_blank" href="https://colab.research.google.com/drive/1xn2u-dQa0QfKkumsv7Gg9ao9Lr2lm1b1?usp=sharing">
+<img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+
 Accordingly, we can ask the agent, get results, and generate a chart! Here is a nice example: 
 
 ```

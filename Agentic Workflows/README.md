@@ -167,3 +167,80 @@ Thought:Final Answer: 88
 88
 
 ```
+
+## AI multi-agent and self-ask
+
+Given a question provided by the user, we have mainly 2 agents:
+- 🤖 **Research agent**: uses self-asking, a questioning technique where you ask yourself a series of questions to help you understand a topic or solve a problem. It involves breaking down a complex question into smaller, more manageable questions that are easier to answer. And eventually, answer the main question.
+- 🤖 **Code agent**: based on the final answer, generates the code to draw a chart.
+
+The code implements the following: 
+- AI Python developer: Generates Python code given text, and returns results (charts)
+- AI Researcher: An agent that breaks down a complex question into a series of simpler / follow up questions. This agent uses a search tool to look up answers to the simpler questions in order to answer the original complex question.
+
+Accordingly, we can ask the agent, get results, and generate a chart! Here is a nice example: 
+
+```
+# The question
+res = llm.invoke("Use self asking to answer the question of in what country, names, and the lengthes in km, of the longest and shortest rivers in the world?, and show the intermediate questions and answers.")
+```
+
+```
+# Generated intermediate (self asking) Questions and Answers: 
+
+Q: What is the longest river in the world?
+A: Nile River
+
+Q: What is the length of the Nile River in kilometers?
+A: 6,650 km
+
+Q: What is the shortest river in the world?
+A: Roe River
+
+Q: What is the length of the Roe River in kilometers?
+A: 61 m (0.061 km)
+
+Final Answer:
+The longest river in the world is the Nile River, located in Egypt, with a length of 6,650 km. The shortest river in the world is the Roe River, located in Montana, USA, with a length of 0.061 km.
+```
+
+The generated python code based on the answer: 
+
+```
+import matplotlib.pyplot as plt
+# Data
+rivers = ['Nile River', 'Roe River']
+lengths = [6650, 0.061]
+
+# Create the bar chart
+plt.bar(rivers, lengths)
+
+# Add numbers inside the bars
+for i, v in enumerate(lengths):
+    plt.text(i, v, str(v))
+
+# Set the title and labels
+plt.title('Lengths of the Longest and Shortest Rivers')
+plt.xlabel('Rivers')
+plt.ylabel('Length (km)')
+	
+# Show the plot
+plt.show()
+```
+
+The generated chart based on the code based on trhe answer of the AI agents
+
+![lms.png](images/chart01.jpg)
+
+## Conclusion 
+
+According to [Deeplearning.ai](https://www.deeplearning.ai/the-batch/how-agents-can-improve-llm-performance/), Open source agent tools and the academic literature on agents are proliferating, making this an exciting time but also a confusing one. To help put this work into perspective, I developed this introduction to AI agentic agents the can be used and extended for the following patterns:
+- **Reflection**: The LLM examines its own work to come up with ways to improve it. 
+- **Tool Use**: The LLM is given tools such as web search, code execution, or any other function to help it gather information, take action, or process data.
+- **Planning**: The LLM comes up with, and executes, a multistep plan to achieve a goal (for example, writing an outline for an essay, then doing online research, then writing a draft, and so on).
+- **Multi-agent collaboration**: More than one AI agent work together, splitting up tasks and discussing and debating ideas, to come up with better solutions than a single agent would.
+
+
+---
+### For more, follow me: [Ibrahim Sobh](https://www.linkedin.com/in/ibrahim-sobh-phd-8681757/)  
+---

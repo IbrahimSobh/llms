@@ -55,7 +55,7 @@ Let's see the code for using LangGraph in different simple situations:
 - Try to guess a number or char, if you fail try again.
 - Try to guess a number, if succeed, try to guess a char, if fail in number or chat, try again. 
 
-## 🤖 AI Text Assistant
+## 2) 🤖 AI Text Assistant
 
 ![lms.png](images/TextAssistant.png)
 
@@ -97,9 +97,7 @@ Here is a sample output:
 {'keys': {'generation': '🛡️ Unit Test: The Ultimate Defense for Your Code 💪', 'error': 'None', 'subject': 'software unit testing', 'iterations': 2}}
 ```
 
-## 2) AI Agents 
-
-![lms.png](images/selfaskingagents.png)
+## 3) AI Agents 
 
 The core idea of agents is to use a language model to choose a sequence of actions to take. In this example, we are building an AI agent powered by different tools (functions) such as:
 - Web search
@@ -174,7 +172,7 @@ Thought:Final Answer: 88
 
 ```
 
-## 3) AI multi-agent and self-ask
+## 4) AI multi-agent and self-ask
 
 Given a question provided by the user, we have mainly 2 agents:
 - 🤖 **Research agent**: uses self-asking, a questioning technique where you ask yourself a series of questions to help you understand a topic or solve a problem. It involves breaking down a complex question into smaller, more manageable questions that are easier to answer. And eventually, answer the main question.
@@ -236,7 +234,7 @@ plt.show()
 
 The generated chart based on the code based on trhe answer of the AI agents
 
-![lms.png](images/chart01.jpg)
+![lms.png](images/selfaskingagents.png)
 
 ## Conclusion 
 

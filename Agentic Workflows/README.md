@@ -13,7 +13,9 @@ LLMs are mostly used in zero-shot mode, prompting a model to generate an output 
 This code is the first step of using LangGraph to bulid generic and simple graphs even without LLMs.
 
 
-## LangGrpah, minimal code
+## 1) LangGrpah, minimal code, without AI
+
+![lms.png](images/guess.png)
 
 This is a simple code for using LangGrpah (even without any AI / LLMs). The graph is defined by:
 - Nodes or functions
@@ -55,6 +57,8 @@ Let's see the code for using LangGraph in different simple situations:
 
 ## 🤖 AI Text Assistant
 
+![lms.png](images/TextAssistant.png)
+
 This code develops a simple AI Writing Assistant, designed to generate text for you, evalaute the generated text and keep ehnacing it. This code ise developed based on LangChain, LangGraph and Gemini LLM. The example is for generating attractive post titles about some topic of your choice. Here is the graph in terms of nodes and edges. 
 
 <a target="_blank" href="https://colab.research.google.com/drive/17sC2aqdEbgLkDCxSMhYpfbyWIGrcN080?usp=sharing">
@@ -93,7 +97,9 @@ Here is a sample output:
 {'keys': {'generation': '🛡️ Unit Test: The Ultimate Defense for Your Code 💪', 'error': 'None', 'subject': 'software unit testing', 'iterations': 2}}
 ```
 
-## AI Agents 
+## 2) AI Agents 
+
+![lms.png](images/selfaskingagents.png)
 
 The core idea of agents is to use a language model to choose a sequence of actions to take. In this example, we are building an AI agent powered by different tools (functions) such as:
 - Web search
@@ -168,7 +174,7 @@ Thought:Final Answer: 88
 
 ```
 
-## AI multi-agent and self-ask
+## 3) AI multi-agent and self-ask
 
 Given a question provided by the user, we have mainly 2 agents:
 - 🤖 **Research agent**: uses self-asking, a questioning technique where you ask yourself a series of questions to help you understand a topic or solve a problem. It involves breaking down a complex question into smaller, more manageable questions that are easier to answer. And eventually, answer the main question.

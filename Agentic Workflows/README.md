@@ -97,7 +97,7 @@ Here is a sample output:
 {'keys': {'generation': '🛡️ Unit Test: The Ultimate Defense for Your Code 💪', 'error': 'None', 'subject': 'software unit testing', 'iterations': 2}}
 ```
 
-## 3) AI Agents 
+## 3) AI Agents with tools  
 
 The core idea of agents is to use a language model to choose a sequence of actions to take. In this example, we are building an AI agent powered by different tools (functions) such as:
 - Web search

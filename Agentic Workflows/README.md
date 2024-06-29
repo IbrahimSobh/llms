@@ -8,7 +8,7 @@ _"I think AI agent workflows will drive massive AI progress this year — perhap
 
 LLMs are mostly used in zero-shot mode, prompting a model to generate an output directly. With an agent workflow, we can ask the LLM to go through some steps and iteration to get the final output. Such an iterative workflow yields much better results than a single pass. 
 
-🤖[LangGraph](https://python.langchain.com/docs/langgraph) is a library for building stateful, multi-actor applications with LLMs, built on top of (and intended to be used with) LangChain.
+[LangGraph](https://python.langchain.com/docs/langgraph) is a library for building stateful, multi-actor applications with LLMs, built on top of (and intended to be used with) LangChain.
 
 This code is the first step of using LangGraph to bulid generic and simple graphs even without LLMs.
 
@@ -91,4 +91,79 @@ Here is a sample output:
 ```
 {'keys': {'generation': 'Unit Test: Protect Your Code', 'error': 'FAIL', 'subject': 'software unit testing', 'iterations': 1}}
 {'keys': {'generation': '🛡️ Unit Test: The Ultimate Defense for Your Code 💪', 'error': 'None', 'subject': 'software unit testing', 'iterations': 2}}
+```
+
+## AI Agents 
+
+The core idea of agents is to use a language model to choose a sequence of actions to take. In this example, we are building an AI agent powered by different tools (functions) such as:
+- Web search
+- Math calculations
+- Paper arxiv
+- Custom tools
+- etc.
+According to the user's question, the agent selects the suitable and the order of tool(s) to be used, where each tool has a natural langige desciption of its purpose. The following code shows how the tools are defined by a description and a function name.
+
+<a target="_blank" href="https://colab.research.google.com/drive/14v7oNkAitTctzn2qHYylLfZ9RhRh0k_P?usp=sharing">
+<img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+
+```
+tools = [
+        Tool(
+            name = "Search",
+            func=web_search_tool.run,
+            description="useful for when you need to answer questions about current events or generic questions."
+        ),
+        Tool(
+            name="Calculator",
+            func=math_tool.run,
+            description="useful when you need to answer questions about math and calculations."
+        ),
+        Tool(
+            name="Wikipedia",
+            func=wikipedia_tool.run,
+            description="useful when you need an answer about encyclopedic general knowledge, "
+        ),
+        Tool(
+            name="Arxiv",
+            func=arxiv_tool.run,
+            description="useful when you need to search for puplished papers"
+        ),
+        Tool(
+        name="IbrahimSobh",
+        func=custom_function,
+        description="useful for when you need to answer questions about (Ibrahim Sobh)"
+        )
+
+    ]
+```
+
+Now let's see how our agent is going to answer our questions and use the provided tools: 
+
+```
+# our question
+agent_chain.run("How old Tom Cruise should be on 2050?")
+```
+
+```
+# Plan of actions
+> Entering new AgentExecutor chain...
+Action: Calculator
+Action Input: 2050 - 1962
+
+> Entering new LLMMathChain chain...
+2050 - 1962```text
+2050 - 1962
+
+...numexpr.evaluate("2050 - 1962")...
+
+Answer: 88
+> Finished chain.
+
+Observation: Answer: 88
+Thought:Final Answer: 88
+
+> Finished chain.
+88
+
 ```

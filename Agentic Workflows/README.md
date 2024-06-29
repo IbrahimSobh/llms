@@ -2,6 +2,9 @@
 
 _"I think AI agent workflows will drive massive AI progress this year — perhaps even more than the next generation of foundation models. This is an important trend, and I urge everyone who works in AI to pay attention to it."_ Andrew Ng
 
+
+![lms.png](images/cover.png)
+
 ---
 
 ## Introduction: 

@@ -53,3 +53,42 @@ Let's see the code for using LangGraph in different simple situations:
 - Try to guess a number or char, if you fail try again.
 - Try to guess a number, if succeed, try to guess a char, if fail in number or chat, try again. 
 
+## 🤖 AI Text Assistant
+
+This code develops a simple AI Writing Assistant, designed to generate text for you, evalaute the generated text and keep ehnacing it. This code ise developed based on LangChain, LangGraph and Gemini LLM. The example is for generating attractive post titles about some topic of your choice. Here is the graph in terms of nodes and edges. 
+
+<a target="_blank" href="https://colab.research.google.com/drive/17sC2aqdEbgLkDCxSMhYpfbyWIGrcN080?usp=sharing">
+<img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+
+```
+# Define the nodes
+workflow.add_node("generate", generate)  # generation initial txt
+workflow.add_node("evaluate", evaluate)  # evalaute txt
+workflow.add_node("rephrase", rephrase)  # re-phrase txt
+
+
+# Build graph
+workflow.set_entry_point("generate")
+workflow.add_edge("generate", "evaluate")
+workflow.add_edge("rephrase", "evaluate")
+workflow.add_conditional_edges(
+    "evaluate",
+    decide_to_finish,
+    {
+        "end": END,
+        "rephrase": "rephrase",
+    },
+)
+
+# Compile
+app = workflow.compile()
+
+```
+
+Here is a sample output: 
+
+```
+{'keys': {'generation': 'Unit Test: Protect Your Code', 'error': 'FAIL', 'subject': 'software unit testing', 'iterations': 1}}
+{'keys': {'generation': '🛡️ Unit Test: The Ultimate Defense for Your Code 💪', 'error': 'None', 'subject': 'software unit testing', 'iterations': 2}}
+```

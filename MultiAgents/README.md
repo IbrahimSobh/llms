@@ -11,6 +11,10 @@ For example, [crewAI](https://www.crewai.com/) is an open-source framework for b
 - Cooperation: Perform tasks in series, in parallel, and hierarchically.
 - LLMs: GPT, Gemini, Llama, etc.
 
+![Multiagents01.png](images/Multiagents01.png) 
+
+---
+
 ## 1) Simple multi-agent research team
 This notebook demonstrates the use of a simple multi-agent system built with the crewai library for performing a research task. The system simulates a research team with an AI Researcher, AI Expert Supervisor, and Technical Writer, who collaborate to propose, assess, and write an abstract for a research paper on recent advances in LLMs (Large Language Models)
 

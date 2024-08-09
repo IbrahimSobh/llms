@@ -104,8 +104,95 @@ Result example:
 
 ---
 
-### 3) 
+### 3) Multi agent research team with an LLM Manager
+This code implements a hierarchical multi-agent system designed to simulate a research team with a manager. The system aims to automate the process of generating research contributions in the field of Large Language Models (LLMs).
+The manager's role is to oversee the entire research process, including:Task Allocation: Assigning tasks to agents (Researcher, Supervisor, Writer) based on their capabilities, Coordination, and validation. This hierarchical structure mimics a real-world research team, enhancing organization and efficiency in generating novel LLM research contributions. By specifying a manager it oversees task execution, including planning, delegation, and validation. The manager allocates tasks to agents based on their capabilities, reviews outputs, and assesses task completion.
 
+Adding LLM Manager for the hierarchical process
+```
+# Define the Crew
+crew = Crew(
+    agents=[Researcher, Supervisor, Writer],
+    tasks=[task1, task2, task3],
+    verbose=True,
+    process=Process.hierarchical,
+    manager_llm=llm,
+    memory=True,
+    embedder={
+        "provider": "google",
+        "config":{
+            "model": 'models/embedding-001',
+            "task_type": "retrieval_document",
+            "title": "Embeddings for Embedchain"
+            }
+        }
+)
+```
+In the definition of a task, agent responsible for the task can be assigned either directly or by the crew's process.
+```
+task2 = Task(
+    description="""Evaluate proposed contribution in terms of novelty and impact.
+		Write a short report with clear possible enhacements, if any.
+    If no enhacements, then you may declare that the current proposal is good enough and ready to be written as title and abstact.
+    """,
+    agent=Supervisor, 
+    expected_output='Either an evaluation report with clear potential enhancments for the proposed contribution, or if no furthur enhacements needed, then the outpout is a short paragraph summary of the the proposed contribution.'
+)
+```
 
+Result Example: 
 
+**Title: Enhancing Contextualized Reasoning Abilities in LLMs: A Novel Approach and Evaluation**
+**Abstract**: This research paper presents a novel approach to enhance the contextualized reasoning abilities of Large Language Models (LLMs). The proposed approach leverages recent advancements in natural language processing and machine learning to enable LLMs to reason more effectively within specific contexts. The paper begins by providing a comprehensive overview of the current state-of-the-art in LLM research, highlighting the limitations of existing models in handling complex reasoning tasks. The proposed approach is then described in detail, outlining its key components and underlying algorithms. The paper proceeds to present a thorough evaluation of the proposed approach, demonstrating its effectiveness in improving the reasoning abilities of LLMs on a range of benchmark datasets. The results of the evaluation indicate that the proposed approach significantly outperforms existing methods, achieving state-of-the-art performance on several reasoning tasks. The paper concludes by discussing the potential implications of the proposed approach for various applications, such as natural language understanding, question answering, and dialogue generation.
+
+---
+
+## 4) Multi agent research team with an agent as a custom Manager
+
+This code defines a multi-agent system designed to act as a research assistant in the field of Large Language Models (LLMs). It includes agents for research, supervision, and writing, each with specific roles and goals. The agents collaborate to propose, evaluate, and refine a novel research contribution in the LLM domain. The agent manager coordinates the efforts of these agents, ensuring efficient task completion and high-quality output, the agents work together effectively to achieve the overall goal.
+
+Define the manager agent:
+```
+manager = Agent(
+    role="Research Manager",
+    goal="Efficiently manage the crew and ensure high-quality task completion",
+    backstory="You're an experienced project manager with research background in the area of {research_area}, skilled in overseeing complex tasks and projects and guiding teams to success. Your role is to coordinate the efforts of the crew members, ensuring that each task is completed to the highest standard. Ensuring the the crew memeber are utilized efficiently.",
+    allow_delegation=True,
+    llm=llm
+    )
+```
+
+Define the task: 
+```
+task = Task(
+    description="""
+    1) Search for and propose a novel and impactful contribution as a new LLMs research paper.
+    2) Evalaute the proposed contribution in terms of novelty and impact.
+    3) Propose clear possible enhacements, if any, to be conducted to enhance the contribution.
+    4) Apply enhancements to the proposed contribution.
+    5) After repeated cycles of proposing and enhancing the contribution, and if the contribution is good enough, write the final output as a title and abstact of the contribution.
+    """,
+    expected_output='Title of a paper, and the abstract as a paragraph. If you are going to use the search tool, replace the search positional argument to be search_query'
+)
+```
+
+Define crew with a custom manager agent:
+```
+crew = Crew(
+    agents=[Researcher, Supervisor, Writer],
+    tasks=[task],
+    verbose=True,
+    manager_agent=manager, # custom manager
+    process=Process.hierarchical,
+    )
+```
+
+Result example:
+
+**Title: Enhancing Large Language Models for Improved Accuracy and Contextual Relevance**
+**Abstract**: Large Language Models (LLMs) have revolutionized natural language processing tasks. However, they still face challenges with accuracy and contextual relevance. This paper proposes several enhancements to address these limitations. Firstly, we increase the number of beams used in the decoder to improve the accuracy of the output sequence. Secondly, we customize the LLM for domain-specific data to provide more relevant and contextually appropriate responses. Thirdly, we incorporate retrieval augmented generation (RAG) to address hallucinations and out-of-date training data. Finally, we specify the writing style, tone, audience, and response to guide the LLM's output. Experimental results demonstrate that these enhancements significantly improve the accuracy and contextual relevance of the LLM's responses.
+
+--- 
+
+## 5) 
 

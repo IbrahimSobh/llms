@@ -247,7 +247,7 @@ The generated chart based on the code based on trhe answer of the AI agents
 
 ## Conclusion 
 
-According to [Deeplearning.ai](https://www.deeplearning.ai/the-batch/how-agents-can-improve-llm-performance/), Open source agent tools and the academic literature on agents are proliferating, making this an exciting time but also a confusing one. To help put this work into perspective, I developed this introduction to AI agentic agents the can be used and extended for the following patterns:
+According to [Deeplearning.ai](https://www.deeplearning.ai/the-batch/how-agents-can-improve-llm-performance/), Open source agent tools and the academic literature on agents are proliferating, making this an exciting time but also a confusing one. To help put this work into perspective, I developed this introduction to AI agentic agents that can be used and extended for the following patterns:
 - **Reflection**: The LLM examines its own work to come up with ways to improve it. 
 - **Tool Use**: The LLM is given tools such as web search, code execution, or any other function to help it gather information, take action, or process data.
 - **Planning**: The LLM comes up with, and executes, a multistep plan to achieve a goal (for example, writing an outline for an essay, then doing online research, then writing a draft, and so on).

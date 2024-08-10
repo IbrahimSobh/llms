@@ -21,6 +21,8 @@ For example, [crewAI](https://www.crewai.com/) is an open-source framework for b
 <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 
+![multiagents001.png](images/multiagents001.png) 
+
 This notebook demonstrates the use of a simple multi-agent system built with the crewai library for performing a research task. The system simulates a research team with an AI Researcher, AI Expert Supervisor, and Technical Writer, who collaborate to propose, assess, and write an abstract for a research paper on recent advances in LLMs (Large Language Models)
 
 Agent example: 
@@ -75,6 +77,8 @@ This research paper presents a novel framework for leveraging Large Language Mod
 <a target="_blank" href="https://colab.research.google.com/drive/1k5EFce4dnHTfqtzhqHaOPm10WSw_FsGy?usp=sharing">
 <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
+
+![multiagents002.png](images/multiagents002.png) 
 
 This notebook demonstrates how to build a multi-agent research team using CrewAI. The agents can use tools like web search and memory to collaborate on tasks of Proposing novel LLM research contributions, Evaluating the novelty and impact of proposed contributions and Writing research titles and abstracts. The goal of this system is to streamline the research process by leveraging AI agents for idea generation, evaluation, and writing.
 - **Memory** to aid agents to remember, reason, and learn from past interactions.
@@ -131,6 +135,8 @@ This paper presents a novel approach to enhancing the factual grounding and reas
 <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 
+![multiagents003.png](images/multiagents003.png) 
+
 This code implements a hierarchical multi-agent system designed to simulate a research team with a manager. The system aims to automate the process of generating research contributions in the field of Large Language Models (LLMs).
 The manager's role is to oversee the entire research process, including:Task Allocation: Assigning tasks to agents (Researcher, Supervisor, Writer) based on their capabilities, Coordination, and validation. This hierarchical structure mimics a real-world research team, enhancing organization and efficiency in generating novel LLM research contributions. By specifying a manager it oversees task execution, including planning, delegation, and validation. The manager allocates tasks to agents based on their capabilities, reviews outputs, and assesses task completion.
 
@@ -181,6 +187,8 @@ This research paper presents a novel approach to enhance the contextualized reas
 <a target="_blank" href="https://colab.research.google.com/drive/1NirBFAF2NUQl5x-CNPKeuXgk-e1_2ty_?usp=sharing">
 <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
+
+![multiagents004.png](images/multiagents004.png) 
 
 This code defines a multi-agent system designed to act as a research assistant in the field of Large Language Models (LLMs). It includes agents for research, supervision, and writing, each with specific roles and goals. The agents collaborate to propose, evaluate, and refine a novel research contribution in the LLM domain. The agent manager coordinates the efforts of these agents, ensuring efficient task completion and high-quality output, the agents work together effectively to achieve the overall goal.
 
@@ -235,6 +243,8 @@ Large Language Models (LLMs) have revolutionized natural language processing tas
 <a target="_blank" href="https://colab.research.google.com/drive/1UxJl2LOsVpfQx9hRK_qFqP7tdEqjuveD?usp=sharing">
 <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
+
+![multiagents005.png](images/multiagents005.png) 
 
 This example demonstrates how to build a multi-agent system using the crewai library. The system simulates a research environment with agents acting as researchers, an integrator, and a writer, collaborating to generate and refine research and business ideas on a given topic. It leverages a large language model (LLM) for text generation and tools like web search for information gathering. Async task: the task executes asynchronously, allowing progression without waiting for completion. Multi agent system as a research assistant This is a simple multi agent system with:
 - Two researchers (Scientific and Business) wokring in parallel (Async) and thier proposed ideas are intergrated into a more appealing idea.

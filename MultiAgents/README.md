@@ -84,6 +84,12 @@ This notebook demonstrates how to build a multi-agent research team using CrewAI
 - **Memory** to aid agents to remember, reason, and learn from past interactions.
 - **Web search tool** to for finding a novel and impactful research contribution
 
+Define a web search tool: 
+```
+from langchain_community.tools import DuckDuckGoSearchRun
+search_tool = DuckDuckGoSearchRun(max_results=3)
+```
+
 Tools can be assigned to agents:
 ```
 Researcher = Agent(
@@ -96,7 +102,7 @@ Researcher = Agent(
     verbose=True,  # enable more detailed or extensive output
     allow_delegation=True,  # enable collaboration between agent
     llm=llm,
-    tools=tools, # web search tool
+    tools=[search_tool], # web search tool
 )
 ```
 

@@ -11,6 +11,10 @@ Large Multimodal Models (LMMs) are a rapidly advancing field in AI that process 
 
 ![lmms02.png](images/lmms02.png)
 
+<a target="_blank" href="https://colab.research.google.com/drive/1MwIksedKid52uzSUHnEBr_Z1Kp4tbKmX?usp=sharing">
+<img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+
 In this introductory notebook, we explore the capabilities of Gemini large multimodal models, which excel in understanding content across various modalities, including images and text. This code demonstrates how to use Gemini to describe images accurately, ask insightful questions, and receive detailed answers. Additionally, it highlights the model’s advanced reasoning abilities, showcasing its potential in complex problem-solving scenarios. Whether you’re a developer, researcher, or enthusiast, this guide provides a comprehensive overview of leveraging Gemini’s powerful features for diverse applications.
 
 --- 
@@ -18,6 +22,10 @@ In this introductory notebook, we explore the capabilities of Gemini large multi
 ## LMMs  with Audio and Video
 
 ![lmms03.png](images/lmm03.png)
+
+<a target="_blank" href="https://colab.research.google.com/drive/1T9Q_ViDTv2K8pHVQVDBm5a4rdv02Ii8M?usp=sharing">
+<img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
 
 In this notebook, we delve into the versatile capabilities of Gemini large multimodal models (LMMs). The notebook guides you through the process of using Gemini to understand, summarize and transcripe audio and video files effectively. Additionally, it demonstrates how to leverage Gemini for searching and answering user questions, with a focus on reasoning through the responses. This comprehensive guide is ideal for developers and researchers looking to harness the full potential of multimodal functionalities for diverse applications.
 

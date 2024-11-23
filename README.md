@@ -1,4 +1,4 @@
-# Large Language Models (llms)
+# Large Language Models (LLMs)
 
 
 ![lms.png](images/lms.png)

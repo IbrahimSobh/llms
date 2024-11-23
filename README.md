@@ -4,6 +4,11 @@
 ![lms.png](images/lms.png)
 _Source_ [A Survey of Large Language Models](https://arxiv.org/pdf/2303.18223.pdf)
 
+## See also 
+- [LMMs: Large Multimodal Models](https://github.com/IbrahimSobh/llms/tree/main/LMMs)
+- [AI Multi-Agent Systems](https://github.com/IbrahimSobh/llms/tree/main/MultiAgents)
+- [Agentic Workflows](https://github.com/IbrahimSobh/llms/tree/main/Agentic%20Workflows)
+
 ## Content
 - What is a language model?
 - Applications of language models

@@ -1,0 +1,74 @@
+# Site settings
+title: "Large Language Models (LLMs)"
+description: "A comprehensive guide to Large Language Models covering theoretical and practical aspects"
+author: "Ibrahim Sobh"
+email: ""
+baseurl: "/llms"
+url: "https://ibrahimsobh.github.io"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - "*.ipynb"
+
+# Collections
+collections:
+  notebooks:
+    output: true
+    permalink: /:collection/:name/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "notebooks"
+    values:
+      layout: "notebook"
+
+# Navigation
+navigation:
+  - title: "Home"
+    url: "/"
+  - title: "Notebooks"
+    url: "/notebooks/"
+  - title: "About"
+    url: "/about/"
+
+# Social links
+github_username: IbrahimSobh
+linkedin_username: ibrahim-sobh-phd-8681757
+
+# Google Analytics (optional)
+# google_analytics: UA-XXXXXXXX-X
+
+# Syntax highlighting
+kramdown:
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true

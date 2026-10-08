@@ -26,7 +26,7 @@ _Source_ [A Survey of Large Language Models](https://arxiv.org/pdf/2303.18223.pd
 - Evaluating LLM-based systems
 - AI Agents
 - LLMs for Computer vision (TBD) 
-- Further readings
+- Further reading
 
 
 ---
@@ -55,7 +55,7 @@ The main purpose of **Language Models** is to assign a probability to a sentence
 
 For Speech Recognition, we use not only the acoustics model (the speech signal), but also a language model. Similarly, for Optical Character Recognition (OCR), we use both a vision model and a language model. Language models are very important for such recognition systems.
 
-> Sometimes, you hear or read a sentence that is not clear, but using your language model, you still can recognize it at a high accuracy despite the noisy vision/speech input.
+> Sometimes, you hear or read a sentence that is not clear, but using your language model, you can still recognize it with high accuracy despite the noisy vision/speech input.
 
 The language model computes either of:
 - The probability of an upcoming word: $P(w_5 | w_1, w_2, w_3, w_4)$
@@ -76,7 +76,7 @@ What just happened? The Chain Rule is applied to compute the joint probability o
 ## Statistical Language Modeling:
 
 ### n-gram Language Models
-Using a large amount of text (corpus such as Wikipedia), we collect statistics about how frequently different words are, and use these to predict the next word. For example, the probability that a word _w_ comes after these three words *students opened their* can be estimated as follows: 
+Using a large amount of text (corpus such as Wikipedia), we collect statistics about how frequently different words occur, and use these to predict the next word. For example, the probability that a word _w_ comes after these three words *students opened their* can be estimated as follows: 
 - P(w | students opened their) = count(students opened their w) / count(students opened their)
 
 The above example is a 4-gram model. And we may get: 
@@ -86,7 +86,7 @@ The above example is a 4-gram model. And we may get:
 
 > We can conclude that the word “books” is more probable than “cars” in this context. 
 
-We ignored the previous context before "students opened their"
+We ignored the previous context before "students opened their".
 
 > Accordingly, arbitrary text can be generated from a language model given starting word(s), by sampling from the output probability distribution of the next word, and so on.
 
@@ -95,7 +95,7 @@ We can train an LM on any kind of text, then generate text in that style (Harry 
 <!--
 ### How to estimate these probabilities?
 
-Amusing we have a large text corpus (data set like Wikipedia), we can count and divide as follows:
+Assuming we have a large text corpus (data set like Wikipedia), we can count and divide as follows:
 
 - $P(clear |The, water, is, so) = Count (The, water, is, so, clear) / Count (The, water, is, so)$
 -->
@@ -120,7 +120,7 @@ Formally:
 
 > We can extend to trigrams, 4-grams, 5-grams, and N-grams.
 
- In general, this is an insufficient model of language because the language has long-distance dependencies. However, in practice, these 3,4 grams work well for most of the applications.
+ In general, this is an insufficient model of language because the language has long-distance dependencies. However, in practice, 3-gram and 4-gram models work well for most applications.
 
 <!---
 ### Estimating bigram probabilities:
@@ -142,7 +142,7 @@ $log(p1 × p2 × p3 × p4 ) = log p1 + log p2 + log p3 + log p4$
 
 Google's N-gram Models Belong to You: Google Research has been using word n-gram models for a variety of R&D projects. [Google N-Gram](https://ai.googleblog.com/2006/08/all-our-n-gram-are-belong-to-you.html) processed 1,024,908,267,229 words of running text and published the counts for all 1,176,470,663 five-word sequences that appear at least 40 times.
 
-The counts of text from the Linguistics Data Consortium [LDC](https://www.ldc.upenn.edu/) are as follows:
+The counts of text from the Linguistic Data Consortium [LDC](https://www.ldc.upenn.edu/) are as follows:
 
 ```
 File sizes: approx. 24 GB compressed (gzip'ed) text files
@@ -182,28 +182,28 @@ Try some examples of your own using [Google Books Ngram Viewer](https://books.go
 ### Limitations of Statistical Language models
  
 Sometimes we do not have enough data to estimate. Increasing n makes sparsity problems worse. Typically we can’t have n bigger than 5.
-- Sparsity problem 1: count(students opened their w) = 0? Smoothing Solution: Add small 𝛿 to the count for every _w_ in the vocabulary.
+- Sparsity problem 1: count(students opened their w) = 0? Smoothing Solution: Add a small 𝛿 to the count for every _w_ in the vocabulary.
 - Sparsity problem 2: count(students opened their) = 0? Backoff Solution:  condition on (opened their) instead.
 - Storage issue: Need to store the count for all n-grams you saw in the corpus. Increasing n or increasing corpus increases storage size. 
 ---
 
 ## Neural Language Models (NLM)
 
-NLM usually (but not always) uses an RNN to learn sequences of words (sentences, paragraphs, … etc) and hence can predict the next word. 
+NLM usually (but not always) uses an RNN to learn sequences of words (sentences, paragraphs, etc.) and hence can predict the next word. 
 
 **Advantages:**
-- Can process variable-length input as the computations for step t use information from many steps back (eg: RNN)
+- Can process variable-length input as the computations for step t use information from many steps back (e.g., RNN)
 - No sparsity problem (can feed any n-gram not seen in the training data)
-- Model size doesn’t increase for longer input ($W_h, W_e, $), the same weights are applied on every timestep and need to store only the vocabulary word vectors.
+- Model size doesn’t increase for longer input ($W_h, W_e$), the same weights are applied on every timestep and need to store only the vocabulary word vectors.
 
 ![nlm01.png](images/nlm01.png)
 
-As depicted, At each step, we have a probability distribution of the next word over the vocabulary.
+As depicted, at each step, we have a probability distribution of the next word over the vocabulary.
 
 **Training an NLM:**
 1. Use a big corpus of text (a sequence of words such as Wikipedia) 
 2. Feed into the NLM (a batch of sentences); compute output distribution for every step. (predict probability dist of every word, given words so far)
-3. Loss function on each step t cross-entropy between predicted probability distribution, and the true next word (one-hot)
+3. The loss function on each step t is the cross-entropy between predicted probability distribution, and the true next word (one-hot)
 
 **Example of long sequence learning:**
 - The writer of the books (_is_ or _are_)? 
@@ -213,13 +213,13 @@ As depicted, At each step, we have a probability distribution of the next word o
 
 **Disadvantages:**
 - Recurrent computation is _slow_ (sequential, one step at a time)
-- In practice, for long sequences, difficult_ to access information_ from many steps back
+- In practice, for long sequences, it is _difficult to access information_ from many steps back
 
 
 ---
 ### Conditional language model
 
-LM can be used to generate text conditions on input (speech, image (OCR), text, etc.) across different applications such as: speech recognition, machine translation, summarization, etc.
+LMs can be used to generate text conditioned on input (speech, image (OCR), text, etc.) across different applications such as: speech recognition, machine translation, summarization, etc.
 
 ![clm.png](images/clm.png)
 
@@ -248,9 +248,9 @@ After we have our list of completed hypotheses, we select the top one with the h
 
 ### Extrinsic evaluation:
 
-1. For comparing models A and B, put each model in a task (spelling, corrector, speech recognizer, machine translation)
+1. For comparing models A and B, put each model in a task (spelling corrector, speech recognizer, machine translation)
 2. Run the task and compare the accuracy for A and for B
-3. Best evaluation but not practical and time consuming!
+3. This is the best evaluation, but it is impractical and time-consuming.
 
 ### Intrinsic evaluation:
 
@@ -267,7 +267,7 @@ After we have our list of completed hypotheses, we select the top one with the h
 
 > Lower perplexity = Better model
 
-> Perplexity is related to branch factor: On average, how many things could occur next.
+> Perplexity is related to branching factor: On average, how many things could occur next.
 
 ---
 
@@ -287,26 +287,26 @@ The Transformer architecture was proposed in the paper [Attention is All You Nee
 As mentioned in the paper: 
 > "_We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely_"
 
-The main idea of **attention** can be summarized as mentioned in the OpenAi's [article](https://openai.com/blog/sparse-transformer/):
+The main idea of **attention** can be summarized as mentioned in OpenAI's [article](https://openai.com/blog/sparse-transformer/):
 > "_... every output element is connected to every input element, and the weightings between them are **dynamically calculated based upon the circumstances**, a process called attention._"
 
-Based on this architecture (the vanilla Transformers!), **encoder or decoder** components can be used alone to enable massive pre-trained generic models that can be fine-tuned for downstream tasks such as text classification, translation, summarization, question answering, etc. For Example:
+Based on this architecture (the vanilla Transformer!), **encoder or decoder** components can be used alone to enable massive pre-trained generic models that can be fine-tuned for downstream tasks such as text classification, translation, summarization, question answering, etc. For example:
 
 - "Pre-training of Deep Bidirectional Transformers for Language Understanding" [BERT](https://arxiv.org/abs/1810.04805) is mainly based on the encoder architecture trained on massive text datasets to predict randomly masked words and "is-next sentence" classification tasks.
 - [GPT](https://arxiv.org/pdf/2005.14165.pdf), on the other hand, is an auto-regressive generative model that is mainly based on the decoder architecture, trained on massive text datasets to predict the next word (unlike BERT, GPT can generate sequences).
 
-> These models, BERT and GPT for instance, can be considered as the NLP's ImageNET.
+> These models, BERT and GPT for instance, can be considered as NLP's ImageNet.
 
 ![bertvsgpt.png](images/bertvsgpt.png)
 
 As shown, BERT is deeply bidirectional, OpenAI GPT is unidirectional, and ELMo is shallowly bidirectional.
 
 Pre-trained representations can be:
-- **Context-free**: such as word2vec or GloVe that generates a single/fixed word embedding (vector) representation for each word in the vocabulary (independent of the context of that word at test time)
+- **Context-free**: such as word2vec or GloVe, which generate a single/fixed word embedding (vector) representation for each word in the vocabulary (independent of the context of that word at test time)
 - **Contextual**: generates a representation of each word based on the other words in the sentence.
 
 Contextual Language models can be:
-- **Causal language model (CML)**: Predict the next token passed on previous ones. (GPT)
+- **Causal language model (CLM)**: Predict the next token based on previous ones. (GPT)
 - **Masked language model (MLM)**: Predict the masked token based on the surrounding contextual tokens (BERT)
   
 <!--
@@ -324,7 +324,7 @@ Contextual Language models can be:
 
 ## 💥 Practical LLMs
 
-In this part, we are going to use different large language models 
+In this part, we are going to use different large language models.
 
 ### 🚀 Hello GPT2 
 
@@ -332,7 +332,7 @@ In this part, we are going to use different large language models
 <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 
-[GPT2](https://d4mucfpksywv.cloudfront.net/better-language-models/language_models_are_unsupervised_multitask_learners.pdf) (a successor to GPT) is a pre-trained model on English language using a causal language modeling (**CLM**) objective, trained simply to predict the next word in 40GB of Internet text. It was first released on this [page](https://openai.com/research/better-language-models). GPT2 displays a broad set of capabilities, including the ability to generate conditional synthetic text samples. On language tasks like question answering, reading comprehension, summarization, and translation, GPT2 _begins_ to learn these tasks from the raw text, using no task-specific training data. DistilGPT2 is a distilled version of GPT2, it is intended to be used for similar use cases with the increased functionality of being smaller and easier to run than the base model.
+[GPT2](https://d4mucfpksywv.cloudfront.net/better-language-models/language_models_are_unsupervised_multitask_learners.pdf) (a successor to GPT) is a model pre-trained on the English language using a causal language modeling (**CLM**) objective, trained simply to predict the next word in 40GB of Internet text. It was first released on this [page](https://openai.com/research/better-language-models). GPT2 displays a broad set of capabilities, including the ability to generate conditional synthetic text samples. On language tasks like question answering, reading comprehension, summarization, and translation, GPT2 _begins_ to learn these tasks from the raw text, using no task-specific training data. DistilGPT2 is a distilled version of GPT2. It is intended to be used for similar use cases with the increased functionality of being smaller and easier to run than the base model.
 
 Here we load a pre-trained **GPT2** model, ask the GPT2 model to continue our input text (prompt), and finally, extract embedded features from the DistilGPT2 model. 
 
@@ -353,9 +353,9 @@ generator("The capital of Japan is Tokyo, The capital of Egypt is", max_length=1
 <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 
-[BERT](https://arxiv.org/abs/1810.04805) is a transformers model pre-trained on a large corpus of English data in a self-supervised fashion. This means it was pre-trained on the raw texts only, with no humans labeling them in any way with an automatic process to generate inputs and labels from those texts. More precisely, it was pretrained with two objectives:
-1. Masked language modeling (**MLM**): taking a sentence, the model randomly masks 15% of the words in the input then run the entire masked sentence through the model and has to predict the masked words. This is different from traditional recurrent neural networks (RNNs) that usually see the words one after the other, or from autoregressive models like GPT which internally masks the future tokens. It allows the model to learn a bidirectional representation of the sentence.
-2. Next sentence prediction (**NSP**): the model concatenates two masked sentences as inputs during pretraining. Sometimes they correspond to sentences that were next to each other in the original text, sometimes not. The model then has to predict if the two sentences were following each other or not.
+[BERT](https://arxiv.org/abs/1810.04805) is a transformers model pre-trained on a large corpus of English data in a self-supervised fashion. This means it was pre-trained on the raw texts only, with no humans labeling them in any way, using an automatic process to generate inputs and labels from those texts. More precisely, it was pre-trained with two objectives:
+1. Masked language modeling (**MLM**): taking a sentence, the model randomly masks 15% of the words in the input, then runs the entire masked sentence through the model and has to predict the masked words. This is different from traditional recurrent neural networks (RNNs) that usually see the words one after the other, or from autoregressive models like GPT which internally masks the future tokens. It allows the model to learn a bidirectional representation of the sentence.
+2. Next sentence prediction (**NSP**): the model concatenates two masked sentences as inputs during pre-training. Sometimes they correspond to sentences that were next to each other in the original text, sometimes not. The model then has to predict if the two sentences were following each other or not.
 
 
 In this example, we are going to use a pre-trained **BERT** model for the sentiment analysis task.
@@ -378,7 +378,7 @@ bert_model = model_class.from_pretrained(pretrained_weights)
 <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 
-[GPT4All](https://docs.gpt4all.io/) is an ecosystem to train and deploy powerful and customized large language models that run locally on consumer grade CPUs.
+[GPT4All](https://docs.gpt4all.io/) is an ecosystem to train and deploy powerful and customized large language models that run locally on consumer-grade CPUs.
 
 ```
 import gpt4all
@@ -429,8 +429,8 @@ model = gpt4all.GPT4All("orca-mini-3b.ggmlv3.q4_0.bin")
 <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 
-[Falcon](https://huggingface.co/tiiuae) LLM is TII's flagship series of large language models, built from scratch using a custom data pipeline and distributed training. Falcon-7B/40B models are state-of-the-art for their size, outperforming most other models on NLP benchmarks. Open-sourced a number of artefacts:
-- The Falcon-7/40B pretrained and instruct models, under the Apache 2.0 software license. 
+[Falcon](https://huggingface.co/tiiuae) LLM is TII's flagship series of large language models, built from scratch using a custom data pipeline and distributed training. Falcon-7B/40B models are state-of-the-art for their size, outperforming most other models on NLP benchmarks. TII open-sourced a number of artifacts:
+- The Falcon-7B/40B pre-trained and instruct models, under the Apache 2.0 software license. 
 
 ```
 from transformers import AutoTokenizer, AutoModelForCausalLM
@@ -472,7 +472,7 @@ Girafatron: I love being the tallest animal in the universe! It's really fulfill
 ```
 
 ### 🦙 Llama 2 
-[Llama2](https://huggingface.co/blog/llama2) is a family of state-of-the-art open-access large language models released by Meta today, and we’re excited to fully support the launch with comprehensive integration in Hugging Face. Llama 2 is being released with a very permissive community license and is available for commercial use. The code, pretrained models, and fine-tuned models are all being released today 🔥
+[Llama2](https://huggingface.co/blog/llama2) is a family of state-of-the-art open-access large language models released by Meta, with comprehensive integration in Hugging Face. Llama 2 was released with a very permissive community license and is available for commercial use. The code, pre-trained models, and fine-tuned models were all released together 🔥
 
 ```
 pip install transformers
@@ -588,14 +588,14 @@ For more models, check [CodeTF](https://github.com/salesforce/CodeTF) from Sales
 
 ## 🤗 How to generate text using different decoding methods
 
-- 👉 𝐆𝐫𝐞𝐞𝐝𝐲 𝐬𝐞𝐚𝐫𝐜𝐡 is the simplest decoding method. It selects the word with the highest probability as its next word. The major drawback of greedy search though is that it misses high probability words hidden behind a low probability word.
-- 👉 𝐁𝐞𝐚𝐦 𝐬𝐞𝐚𝐫𝐜𝐡 reduces the risk of missing hidden high probability word sequences by keeping the most likely num_beams of hypotheses at each time step and eventually choosing the hypothesis that has the overall highest probability.
+- 👉 𝐆𝐫𝐞𝐞𝐝𝐲 𝐬𝐞𝐚𝐫𝐜𝐡 is the simplest decoding method. It selects the word with the highest probability as its next word. The major drawback of greedy search though is that it misses high-probability words hidden behind a low-probability word.
+- 👉 𝐁𝐞𝐚𝐦 𝐬𝐞𝐚𝐫𝐜𝐡 reduces the risk of missing hidden high-probability word sequences by keeping the most likely num_beams of hypotheses at each time step and eventually choosing the hypothesis that has the overall highest probability.
 
 ✅ Beam search will always find an output sequence with higher probability than greedy search, but is not guaranteed to find the most likely output.
 
 💡 In transformers, we simply set the parameter num_return_sequences to the number of highest scoring beams that should be returned. Make sure though that num_return_sequences <= num_beams!
 
-✅ Beam search can work very well in tasks where the length of the desired generation is more or less predictable as in machine translation or summarization. 🟥But this is not the case for open-ended generation where the desired output length can vary greatly, e.g. dialog and story generation. beam search heavily suffers from repetitive generation. As humans, we want generated text to surprise us and not to be boring/predictable (🟥Beam search is less surprising)
+✅ Beam search can work very well in tasks where the length of the desired generation is more or less predictable as in machine translation or summarization. 🟥But this is not the case for open-ended generation where the desired output length can vary greatly, e.g. dialog and story generation. Beam search suffers heavily from repetitive generation. As humans, we want generated text to surprise us and not to be boring/predictable (🟥Beam search is less surprising).
 
 - 👉 𝐒𝐚𝐦𝐩𝐥𝐢𝐧𝐠 means randomly picking the next word according to its conditional probability distribution. Sampling is not deterministic anymore.
 
@@ -603,7 +603,7 @@ For more models, check [CodeTF](https://github.com/salesforce/CodeTF) from Sales
 
 👉 𝐓𝐨𝐩-𝐊 𝐬𝐚𝐦𝐩𝐥𝐢𝐧𝐠: the K most likely next words are filtered and the probability mass is redistributed among only those K next words. GPT2 adopted this sampling scheme.
 
-👉 𝐓𝐨𝐩-𝐩 𝐬𝐚𝐦𝐩𝐥𝐢𝐧𝐠: Instead of sampling only from the most likely K words, in Top-p sampling chooses from the smallest possible set of words whose cumulative probability exceeds the probability p. The probability mass is then redistributed among this set of words. Having set p=0.92, Top-p sampling picks the minimum number of words to exceed together 92% of the probability mass.
+👉 𝐓𝐨𝐩-𝐩 𝐬𝐚𝐦𝐩𝐥𝐢𝐧𝐠: Instead of sampling only from the most likely K words, Top-p sampling chooses from the smallest possible set of words whose cumulative probability exceeds the probability p. The probability mass is then redistributed among this set of words. Having set p=0.92, Top-p sampling picks the minimum number of words to exceed together 92% of the probability mass.
 
 ```
 # set top_k = 50 and set top_p = 0.95 and num_return_sequences = 3
@@ -621,14 +621,15 @@ sample_outputs = model.generate(
 
 ![topktopp.png](images/topktopp.png) 
 
-✅ As ad-hoc decoding methods, top-p and top-K sampling seem to produce more fluent text than traditional greedy - and beam search on open-ended language generation.
+✅ As ad-hoc decoding methods, top-p and top-K sampling seem to produce more fluent text than traditional greedy and beam search on open-ended language generation.
 
 For more, kindly see this blog: [How to generate text: using different decoding methods](https://huggingface.co/blog/how-to-generate#:~:text=Instead%20of%20sampling%20only%20from,among%20this%20set%20of%20words.)
+
 ---
 
 ## 🧑 📝 Prompt Engineering  
 
-- 👉 **Prompt engineering** is the process of designing the prompts (text input) for a language model to generate the required output. Prompt engineering involves selecting appropriate keywords, providing context, being clear and specific in a way that directs the language model behavior achieving desired responses. Through prompt engineering, we can control a model’s tone, style, length, etc. without fine-tuning. 
+- 👉 **Prompt engineering** is the process of designing the prompts (text input) for a language model to generate the required output. Prompt engineering involves selecting appropriate keywords, providing context, being clear and specific in a way that directs the language model's behavior to achieve the desired responses. Through prompt engineering, we can control a model’s tone, style, length, etc. without fine-tuning. 
 
 - 👉 **Zero-shot learning** involves asking the model to make predictions without providing any examples (zero shot), for example:
 
@@ -639,7 +640,7 @@ Sentiment:
 
 Answer: Positive
 ```
-When zero-shot is not good enough, it's recommended to help the model by providing examples in the prompt which leads to few-shot prompting.
+When zero-shot is not good enough, it's recommended to help the model by providing examples in the prompt, which leads to few-shot prompting.
 
 - 👉 **Few-shot learning** involves asking the model while providing a few examples in the prompt, for example:
 
@@ -659,7 +660,7 @@ Sentiment:
 Answer: Negative
 ```
 
-- 👉 **Chain-of-thought ([CoT](https://arxiv.org/abs/2201.11903))** prompting enables complex reasoning capabilities through intermediate reasoning steps. We can combine it with few-shot prompting to get better results on complex tasks that require step by step reasoning before responding.
+- 👉 **Chain-of-thought ([CoT](https://arxiv.org/abs/2201.11903))** prompting enables complex reasoning capabilities through intermediate reasoning steps. We can combine it with few-shot prompting to get better results on complex tasks that require step-by-step reasoning before responding.
 
 ![cot.png](images/cot.png)
 
@@ -676,40 +677,40 @@ In addition to **prompt engineering**, we may consider more options:
 
 ## 🚀 Fine-tuning LLMs
 
-Fine-tuning LLMs on downstream datasets results in huge performance gains when compared to using the pretrained LLMs out-of-the-box (zero-shot inference, for example). However, as models get larger and larger, full fine-tuning becomes infeasible to train on consumer hardware. In addition, storing and deploying fine-tuned models independently for each downstream task becomes very expensive, because fine-tuned models are the same size as the original pretrained model. Parameter-Efficient Fine-tuning ([PEFT](https://huggingface.co/blog/peft)) approaches are meant to address both problems! PEFT approaches enable you to get performance comparable to full fine-tuning while only having a small number of trainable parameters. For example: 
+Fine-tuning LLMs on downstream datasets results in huge performance gains when compared to using the pre-trained LLMs out-of-the-box (zero-shot inference, for example). However, as models get larger and larger, full fine-tuning becomes infeasible to train on consumer hardware. In addition, storing and deploying fine-tuned models independently for each downstream task becomes very expensive, because fine-tuned models are the same size as the original pre-trained model. Parameter-Efficient Fine-tuning ([PEFT](https://huggingface.co/blog/peft)) approaches are meant to address both problems! PEFT approaches enable you to get performance comparable to full fine-tuning while only having a small number of trainable parameters. For example: 
 
 - 👉 [Prompt Tuning](https://arxiv.org/pdf/2104.08691.pdf): a simple yet effective mechanism for learning “soft prompts” to condition frozen language models to perform specific downstream
 tasks. Just like engineered text prompts, soft prompts are concatenated to the input text. But rather than selecting from existing vocabulary items, the “tokens” of the soft prompt are learnable vectors. This means a soft prompt can be optimized end-to-end over a training dataset, as [shown](https://ai.googleblog.com/2022/02/guiding-frozen-language-models-with.html) below: 
 ![pt.png](images/pt.png)
 
-- 👉 **[LoRA](https://arxiv.org/pdf/2106.09685.pdf)** Low-Rank Adaptation of llms is a method that freezes the pretrained model weights and injects trainable rank decomposition matrices into each layer of the Transformer architecture. Greatly reducing the number of trainable parameters for downstream tasks. The figure below, from this [video](https://youtu.be/PXWYUTMt-AU), explians the main idea: 
+- 👉 **[LoRA](https://arxiv.org/pdf/2106.09685.pdf)** Low-Rank Adaptation of LLMs is a method that freezes the pre-trained model weights and injects trainable rank decomposition matrices into each layer of the Transformer architecture, greatly reducing the number of trainable parameters for downstream tasks. The figure below, from this [video](https://youtu.be/PXWYUTMt-AU), explains the main idea: 
 ![lora.png](images/lora.png) 
 
 --- 
 
 ## 🚀 Retrieval Augmented Generation (RAG)
 
-Large language models are usually general purpose, less effective for domain-specific tasks. However, they can be fine-tuned on some tasks such as sentiment analysis. For more complex taks that require external knowledge, it's possible to build a language model-based system that accesses external knowledge sources to complete the required tasks. This enables more factual accuracy, and helps to mitigate the problem of "hallucination". As shown in the [figuer](https://neo4j.com/developer-blog/fine-tuning-retrieval-augmented-generation/) below:
+Large language models are usually general-purpose and less effective for domain-specific tasks. However, they can be fine-tuned on some tasks such as sentiment analysis. For more complex tasks that require external knowledge, it's possible to build a language model-based system that accesses external knowledge sources to complete the required tasks. This enables more factual accuracy, and helps to mitigate the problem of "hallucination". As shown in the [figure](https://neo4j.com/developer-blog/fine-tuning-retrieval-augmented-generation/) below:
 
 ![rag.png](images/rag.png) 
 
-In this case, instead of using LLMs to access its internal knowledge, we use the LLM as a natural language interface to our external knowledge. The first step is to convert the documents and any user queries into a compatible format to perform relevancy search (convert text into vectors, or embeddings). The original user prompt is then appended with relevant / similar documents within the external knowledge source (as a context). The model then answers the questions based on the provided external context.
+In this case, instead of using the LLM to access its internal knowledge, we use the LLM as a natural language interface to our external knowledge. The first step is to convert the documents and any user queries into a compatible format to perform relevancy search (convert text into vectors, or embeddings). The original user prompt is then appended with relevant / similar documents within the external knowledge source (as a context). The model then answers the questions based on the provided external context.
 
 --- 
 
 ##  🦜️🔗 LangChain
-Large language models (LLMs) are emerging as a transformative technology. However, using these LLMs in isolation is often insufficient for creating a truly powerful applications. [LangChain](https://github.com/langchain-ai/langchain) aims to assist in the development of such applications. 
+Large language models (LLMs) are emerging as a transformative technology. However, using these LLMs in isolation is often insufficient for creating truly powerful applications. [LangChain](https://github.com/langchain-ai/langchain) aims to assist in the development of such applications. 
 
 ![lc02.png](images/lc02.png) 
 
 
-There are six main areas that LangChain is designed to help with. These are, in increasing order of complexity:
+There are five main areas that LangChain is designed to help with. These are, in increasing order of complexity:
 
 
 
 ### 👉 📃 LLMs and Prompts: 
 
-This includes prompt management, prompt optimization, a generic interface for all LLMs, and common utilities for working with LLMs. **LLMs and Chat** Models are subtly but importantly different. LLMs in LangChain refer to pure text completion models. The APIs they wrap take a string prompt as input and output a string completion. OpenAI's GPT-3 is implemented as an LLM. Chat models are often backed by LLMs but tuned specifically for having conversations. 
+This includes prompt management, prompt optimization, a generic interface for all LLMs, and common utilities for working with LLMs. **LLMs and Chat Models** are subtly but importantly different. LLMs in LangChain refer to pure text completion models. The APIs they wrap take a string prompt as input and output a string completion. OpenAI's GPT-3 is implemented as an LLM. Chat models are often backed by LLMs but tuned specifically for having conversations. 
 
 - **LLM:** There are lots of LLM providers (OpenAI, Cohere, Hugging Face, etc) - the LLM class is designed to provide a standard interface for all of them.
 
@@ -724,7 +725,7 @@ llm("Tell me a joke")
 # 'Why did the chicken cross the road?\n\nTo get to the other side.'
 ```
 
-You can also access provider specific information that is returned. This information is NOT standardized across providers.
+You can also access provider-specific information that is returned. This information is NOT standardized across providers.
 
 ```
 llm_result.llm_output
@@ -752,7 +753,7 @@ chat(messages)
 
 ```
 
-- **Prompt templates** are pre-defined recipes for generating prompts for language models. A template may include instructions, few shot examples, and specific context and questions appropriate for a given task.
+- **Prompt templates** are pre-defined recipes for generating prompts for language models. A template may include instructions, few-shot examples, and specific context and questions appropriate for a given task.
 
 ```
 from langchain import PromptTemplate
@@ -781,7 +782,7 @@ messages = template.format_messages(
 ```
 
 ### 👉 🔗 Chains 
-Chains go beyond a single LLM call and involve sequences of calls (whether to an LLM or a different utility). LangChain provides a standard interface for chains, lots of integrations with other tools, and end-to-end chains for common applications. Chain very generically can be defined as a sequence of calls to components, which can include other chains.
+Chains go beyond a single LLM call and involve sequences of calls (whether to an LLM or a different utility). LangChain provides a standard interface for chains, lots of integrations with other tools, and end-to-end chains for common applications. A chain can be defined very generically as a sequence of calls to components, which can include other chains.
 ```
 from langchain.llms import OpenAI
 from langchain.prompts import PromptTemplate
@@ -814,7 +815,7 @@ loader = TextLoader("./index.md")
 loader.load()
 ``` 
  
-- Document transformers: Split documents, convert documents into Q&A format, drop redundant documents, and more
+- Document transformers: Split documents, convert documents into Q&A format, drop redundant documents, and more.
 
 ```
 # This is a long document we can split up.
@@ -841,7 +842,7 @@ print(texts[1])
 
 ```
 
-- Text embedding models: Take text and turn it into a list of floating point numbers (vectrors). There are lots of embedding model providers (OpenAI, Cohere, Hugging Face, etc) - this class is designed to provide a standard interface for all of them.
+- Text embedding models: Take text and turn it into a list of floating-point numbers (vectors). There are lots of embedding model providers (OpenAI, Cohere, Hugging Face, etc) - this class is designed to provide a standard interface for all of them.
 
 ```
 from langchain.embeddings import OpenAIEmbeddings
@@ -886,7 +887,7 @@ print(docs[0].page_content)
 #    And I did that 4 days ago, when I nominated Circuit Court of Appeals Judge Ketanji Brown Jackson. One of our nation’s top legal minds, who will continue Justice Breyer’s legacy of excellence.
 ```
   
-- Retrievers: Query your data. A retriever is an interface that returns documents given an unstructured query. It is more general than a vector store. A retriever does not need to be able to store documents, only to return (or retrieve) it. Vector stores can be used as the backbone of a retriever, but there are other types of retrievers as well.
+- Retrievers: Query your data. A retriever is an interface that returns documents given an unstructured query. It is more general than a vector store. A retriever does not need to be able to store documents, only to return (or retrieve) them. Vector stores can be used as the backbone of a retriever, but there are other types of retrievers as well.
 
 ```
 # Let's walk through this in code
@@ -986,11 +987,11 @@ conversation({"question": "hi"})
 <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 
-We can use different methods to chat with our documents. No need to fine-tune the whole LLM, instead we can provide the right context along with our question to the pre-trained model and simply get the answers based on our provided documents. 
-1. **Index phase:** Our documents are divided into chunks, extract embeddings per chunk, and save into an embedding database such as [Chroma](https://www.trychroma.com/).
+We can use different methods to chat with our documents. No need to fine-tune the whole LLM. Instead, we can provide the right context along with our question to the pre-trained model and simply get the answers based on our provided documents. 
+1. **Index phase:** We divide our documents into chunks, extract embeddings per chunk, and save them into an embedding database such as [Chroma](https://www.trychroma.com/).
 2. **Question answering phase:** Given a question, we use the embedding database to get similar chunks, construct a prompt consisting of the question and the context, and feed this to the LLMs and get our answers.    
 
-Here, We chat with this nice article titled [Transformers without pain 🤗](https://www.linkedin.com/pulse/transformers-without-pain-ibrahim-sobh-phd/) asking questions related to transformers, attention, encoder-decoder, etc. while utilizing the powerful [Palm](https://python.langchain.com/docs/get_started/introduction.html) Model by google and the [LangChain](https://python.langchain.com/docs/get_started/introduction.html) framework for developing applications powered by language models.
+Here, we chat with this nice article titled [Transformers without pain 🤗](https://www.linkedin.com/pulse/transformers-without-pain-ibrahim-sobh-phd/) asking questions related to transformers, attention, encoder-decoder, etc. while utilizing the powerful [PaLM](https://blog.google/technology/ai/google-palm-2-ai-large-language-model/) model by Google and the [LangChain](https://python.langchain.com/docs/get_started/introduction.html) framework for developing applications powered by language models.
 
 ```
 # load docs and construct the index
@@ -1008,7 +1009,7 @@ qa_retriever = RetrievalQA.from_chain_type(llm=Palm_llm, chain_type="stuff",
 ```
 
 
-- **Question**: 🧑 'What these documents are about?'
+- **Question**: 🧑 'What are these documents about?'
 - **Answer**: 🤖 'The documents are about transformers, which are a type of neural network that has been used successfully in natural language processing and computer vision tasks.'
 
 - **Question**: 🧑 'What is the main idea of transformers?'
@@ -1017,7 +1018,7 @@ qa_retriever = RetrievalQA.from_chain_type(llm=Palm_llm, chain_type="stuff",
 - **Question**: 🧑 'What is positional encoding?'
 - **Answer**: 🤖 'Positional encoding is a technique used to represent the order of words in a sequence.'
 
-- **Question**: 🧑 'How query, key, and value vectors are used?'
+- **Question**: 🧑 'How are query, key, and value vectors used?'
 - **Answer**: 🤖 'The query vector is used to compute a weighted sum of the values through the keys. Specifically: q dot product all the keys, then softmax to get weights and finally use these weights to compute a weighted sum of the values.'
 
 - **Question**: 🧑 'How to start using transformers?'
@@ -1031,7 +1032,7 @@ You can try your own documents and questions!
 ---
 ### 📢 Ask almost everything (txt, pdf, video, etc.) 
 
-In these simple tutorials: How to get answers from **text** documents, **pdf** files, and even **YouTube** videos using [Chroma](https://www.trychroma.com/) vector database, [PaLM](https://blog.google/technology/ai/google-palm-2-ai-large-language-model/) llm by Google, and a question answering chain from [LangChain](https://python.langchain.com/docs/get_started/introduction.html). Finally, use [Streamlit](https://streamlit.io/) to develop and host the web application. You will need to use your google_api_key (you can get one from Google). Ths system [architecture](https://blog.streamlit.io/langchain-tutorial-4-build-an-ask-the-doc-app/) is as follows:
+In these simple tutorials: How to get answers from **text** documents, **pdf** files, and even **YouTube** videos using [Chroma](https://www.trychroma.com/) vector database, [PaLM](https://blog.google/technology/ai/google-palm-2-ai-large-language-model/) LLM by Google, and a question answering chain from [LangChain](https://python.langchain.com/docs/get_started/introduction.html). Finally, use [Streamlit](https://streamlit.io/) to develop and host the web application. You will need to use your google_api_key (you can get one from Google). The system [architecture](https://blog.streamlit.io/langchain-tutorial-4-build-an-ask-the-doc-app/) is as follows:
 
 ![lc01.png](images/lc01.png)
 
@@ -1051,24 +1052,24 @@ In these simple tutorials: How to get answers from **text** documents, **pdf** f
 ## 👉 🧐 Evaluating LLM-based systems 
 
 There's a difference between evaluating an LLM versus evaluating an LLM-based system. Typically after _generic_ pre-training, LLMs are evaluated on standard benchmarks: 
-- [GLUE](https://gluebenchmark.com/) A benchmark of nine sentence, or sentence-pair language understanding tasks.
+- [GLUE](https://gluebenchmark.com/) A benchmark of nine sentence- or sentence-pair language understanding tasks.
 - [SQuAD 2.0](https://rajpurkar.github.io/SQuAD-explorer/) A reading comprehension dataset, consisting of questions posed by crowdworkers on a set of Wikipedia articles, where the answer to every question is a segment of text, or span, from the corresponding reading passage, or the question might be unanswerable. 
 - [SNLI](https://nlp.stanford.edu/projects/snli/) A collection of 570k human-written English sentence pairs manually labeled for balanced classification with the labels entailment, contradiction, and neutral. 
 - etc.
 
-LLMs systems can summarize text, do question-answering, find the sentiment of a text, can do translation, and more.  Based on the system, evaluation can be as follows: 
+LLM-based systems can summarize text, do question-answering, find the sentiment of a text, translate, and more. Based on the system, evaluation can be as follows: 
 
-- As a good proof of concept, we can examine manually a few inputs and expected responses, where we tune and build the system by trying different components, prompt, etc. However, the systems must be evaluated thoroughly.
-- Create an evaluation dataset on our proivate data. However, this approach is the usually comes at a high cost. 
+- As a good proof of concept, we can examine manually a few inputs and expected responses, where we tune and build the system by trying different components, prompts, etc. However, the systems must be evaluated thoroughly.
+- Create an evaluation dataset on our private data. However, this approach usually comes at a high cost. 
   
 ### LLMs Evaluating LLMs
 
 - 👉 Use an LLM to generate test cases and then evaluate the LLM-based system on them. 
 
-For example in case of **question answering system**, we need pairs of questions and answers in our evaluation set. We can use human annotators to create gold-standard pairs of questions and answers manually. However, it is costly and time-consuming. One feasible way of creating such a dataset is to leverage an LLM. 
+For example, in the case of a **question answering system**, we need pairs of questions and answers in our evaluation set. We can use human annotators to create gold-standard pairs of questions and answers manually. However, it is costly and time-consuming. One feasible way of creating such a dataset is to leverage an LLM. 
 
 ```
-You are a smart assistant designed to come up with meaninful question and answer pair. The question should be to the point and the answer should be as detailed as possible.
+You are a smart assistant designed to come up with meaningful question and answer pair. The question should be to the point and the answer should be as detailed as possible.
 Given a piece of text, you must come up with a question and answer pair that can be used to evaluate a QA bot. Do not make up stuff. Stick to the text to come up with the question and answer pair.
 When coming up with this question/answer pair, you must respond in the following format:
 
@@ -1087,12 +1088,12 @@ Please come up with a question/answer pair, in the specified JSON format, for th
 
 ```
 
-- 👉 Use an LLM to find how well the prediction is compared to the true answer
-Given two texts (true and predicted answers), an LLM can, in theory, find whether they are semantically identical. Langchain has a chain called $QAEvalChain$ that can take in a question and "true" answer along with the predicted answer and output "CORRECT" or "INCORRECT" labels.
+- 👉 Use an LLM to find how good the prediction is compared to the true answer.
+Given two texts (true and predicted answers), an LLM can, in theory, find whether they are semantically identical. LangChain has a chain called `QAEvalChain` that can take in a question and "true" answer along with the predicted answer and output "CORRECT" or "INCORRECT" labels.
 
 - 👉 Moreover, we can use standard metrics for evaluation such as recall, precision and F1 Score.
 
-- 👉 Once we have an eval dataset, a **hyperparameter optimisation** approach makes sens and can be applied across different models, prompts, etc.
+- 👉 Once we have an eval dataset, a **hyperparameter optimization** approach makes sense and can be applied across different models, prompts, etc.
 
 
 For more, this [article](https://wandb.ai/ayush-thakur/llm-eval-sweep/reports/How-to-Evaluate-Compare-and-Optimize-LLM-Systems--Vmlldzo0NzgyMTQz) provides an interactive look into how to go about evaluating your large language model (LLM) systems.  
@@ -1133,7 +1134,7 @@ Examples of extending the power of ChatGPT:
 
 ![aiagentsmath.png](images/aiagentsmath.png)
 
-👉 By allowing you to connect applications, services and tools together, leading to automating your life. The [Zapier plugin](https://zapier.com/blog/announcing-zapier-chatgpt-plugin/) connects you with 100s of online services such as email, social media, cloud storage, and more.
+👉 By allowing you to connect applications, services and tools together, leading to automating your life. The [Zapier plugin](https://zapier.com/blog/announcing-zapier-chatgpt-plugin/) connects you with hundreds of online services such as email, social media, cloud storage, and more.
 
 ![aiagentszapier.png](images/aiagentszapier.png)
   
@@ -1145,7 +1146,7 @@ Examples of extending the power of ChatGPT:
 
 ---
 
-## Further readings:
+## Further reading:
 
 - [Book: Speech and Language Processing; Daniel Jurafsky](https://www.amazon.com/Speech-Language-Processing-Daniel-Jurafsky/dp/0131873210)
 - [Video: Natural Language Processing](https://youtu.be/iWea12EAu6U?list=PLoROMvodv4rOhcuXMZkNm7j3fVwBBY42z)

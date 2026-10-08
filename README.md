@@ -10,6 +10,9 @@ _Source_ [A Survey of Large Language Models](https://arxiv.org/pdf/2303.18223.pd
 - [Agentic Workflows](https://github.com/IbrahimSobh/llms/tree/main/Agentic%20Workflows)
 
 ## Content
+
+![llms-overview.png](images/llms-overview.png)
+
 - What is a language model?
 - Applications of language models
 - Statistical Language Modeling

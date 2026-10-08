@@ -1,14 +1,14 @@
 # AI Multi-Agent Systems 
 
 ## Introduction:
-The power of Multi-agent AI has more to offer. Frameworks for building multi-agent systems are designed to enable AI agents to have roles, share goals, and operate in a cohesive unit. Whether you're building an automated customer service, or research team, multi-agents systems provide the main building blocks for sophisticated multi-agent interactions.
+Multi-agent AI has a lot to offer. Frameworks for building multi-agent systems are designed to enable AI agents to have roles, share goals, and operate as a cohesive unit. Whether you're building an automated customer service system or a research team, multi-agent systems provide the main building blocks for sophisticated multi-agent interactions.
 
 For example, [crewAI](https://www.crewai.com/) is an open-source framework for building multi-agent systems that can automate complex, multi-step tasks. Here are the main features of crewAI:
 - Role-playing: Assign specialized roles to agents 
 - Memory: Provide agents with short-term, long-term, and shared memory
 - Tools: Assign pre-built and custom tools to each agent (e.g. for web search)
 - Guardrails: Effectively handle errors, hallucinations, and infinite loops
-- Cooperation: Perform tasks in series, in parallel, and hierarchically.
+- Cooperation: Perform tasks in series, in parallel, and hierarchically
 - LLMs: GPT, Gemini, Llama, etc.
 
 ![Multiagents01.png](images/Multiagents01.png) 
@@ -23,30 +23,31 @@ For example, [crewAI](https://www.crewai.com/) is an open-source framework for b
 
 ![multiagents001.png](images/multiagents001.png) 
 
-This notebook demonstrates the use of a simple multi-agent system built with the crewai library for performing a research task. The system simulates a research team with an AI Researcher, AI Expert Supervisor, and Technical Writer, who collaborate to propose, assess, and write an abstract for a research paper on recent advances in LLMs (Large Language Models)
+This notebook demonstrates the use of a simple multi-agent system built with the crewAI library for performing a research task. The system simulates a research team with an AI Researcher, an AI Expert Supervisor, and a Technical Writer, who collaborate to propose, assess, and write an abstract for a research paper on recent advances in LLMs (Large Language Models).
 
 Agent example: 
 ```
 Supervisor = Agent(
     role="AI Expert",
-    goal="Make assessment on how contrbution is novel and impactful.",
+    goal="Assess how novel and impactful the contribution is.",
     backstory="""You are an AI expert supervisor with a deep understanding of AI, LLMs and recent related research.
 		Your expertise lies not just in knowing the technology but in foreseeing how it can be leveraged to solve real-world problems and drive business innovation.
 		Your insights are crucial.""",
     verbose=True,  # enable more detailed or extensive output
-    allow_delegation=True,  # enable collaboration between agent
+    allow_delegation=True,  # enable collaboration between agents
     llm=llm
 )
 ```
 
-Task exmaple:
+Task example:
 ```
 task2 = Task(
     description="""Analyze proposals for new ideas or contributions in terms of novelty and impact.
 		Make a report with clear assessment.
     """,
     agent=Supervisor,
-    expected_output='An assessment report with at least one clear proposed enhancment.'
+    expected_output='An assessment report with at least one clear proposed enhancement.'
+)
 ```
 
 Define the crew:
@@ -80,9 +81,9 @@ This research paper presents a novel framework for leveraging Large Language Mod
 
 ![multiagents002.png](images/multiagents002.png) 
 
-This notebook demonstrates how to build a multi-agent research team using CrewAI. The agents can use tools like web search and memory to collaborate on tasks of Proposing novel LLM research contributions, Evaluating the novelty and impact of proposed contributions and Writing research titles and abstracts. The goal of this system is to streamline the research process by leveraging AI agents for idea generation, evaluation, and writing.
-- **Memory** to aid agents to remember, reason, and learn from past interactions.
-- **Web search tool** to for finding a novel and impactful research contribution
+This notebook demonstrates how to build a multi-agent research team using CrewAI. The agents can use tools like web search and memory to collaborate on tasks such as proposing novel LLM research contributions, evaluating the novelty and impact of proposed contributions, and writing research titles and abstracts. The goal of this system is to streamline the research process by leveraging AI agents for idea generation, evaluation, and writing.
+- **Memory** to help agents remember, reason, and learn from past interactions.
+- **Web search tool** for finding a novel and impactful research contribution
 
 Define a web search tool: 
 ```
@@ -94,13 +95,13 @@ Tools can be assigned to agents:
 ```
 Researcher = Agent(
     role="AI Researcher",
-    goal="Find out a novel LLMs research contribution",
+    goal="Find a novel LLM research contribution",
     backstory="""You are a researcher in the area of LLMs. This is crucial for
 		finding out a novel research contribution. You are good at coming up
-		with new and impactful contributions to the LLMs research.
+		with new and impactful contributions to LLM research.
 		""",
     verbose=True,  # enable more detailed or extensive output
-    allow_delegation=True,  # enable collaboration between agent
+    allow_delegation=True,  # enable collaboration between agents
     llm=llm,
     tools=[search_tool], # web search tool
 )
@@ -135,7 +136,7 @@ This paper presents a novel approach to enhancing the factual grounding and reas
 
 ---
 
-### 3) Multi agent research team with an LLM Manager
+## 3) Multi-agent research team with an LLM Manager
 
 <a target="_blank" href="https://colab.research.google.com/drive/1c9mowbiTC0RcDzjvXot1tQnBRWsMr9b4?usp=sharing">
 <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -144,9 +145,9 @@ This paper presents a novel approach to enhancing the factual grounding and reas
 ![multiagents003.png](images/multiagents003.png) 
 
 This code implements a hierarchical multi-agent system designed to simulate a research team with a manager. The system aims to automate the process of generating research contributions in the field of Large Language Models (LLMs).
-The manager's role is to oversee the entire research process, including:Task Allocation: Assigning tasks to agents (Researcher, Supervisor, Writer) based on their capabilities, Coordination, and validation. This hierarchical structure mimics a real-world research team, enhancing organization and efficiency in generating novel LLM research contributions. By specifying a manager it oversees task execution, including planning, delegation, and validation. The manager allocates tasks to agents based on their capabilities, reviews outputs, and assesses task completion.
+The manager's role is to oversee the entire research process, including task allocation (assigning tasks to agents such as the Researcher, Supervisor, and Writer based on their capabilities), coordination, and validation. This hierarchical structure mimics a real-world research team, enhancing organization and efficiency in generating novel LLM research contributions. When a manager is specified, it oversees task execution, including planning, delegation, and validation. The manager allocates tasks to agents based on their capabilities, reviews outputs, and assesses task completion.
 
-Adding LLM Manager for the hierarchical process
+Adding an LLM manager for the hierarchical process:
 ```
 # Define the Crew
 crew = Crew(
@@ -166,29 +167,29 @@ crew = Crew(
         }
 )
 ```
-In the definition of a task, agent responsible for the task can be assigned either directly or by the crew's process.
+In the definition of a task, the agent responsible for the task can be assigned either directly or by the crew's process.
 ```
 task2 = Task(
-    description="""Evaluate proposed contribution in terms of novelty and impact.
-		Write a short report with clear possible enhacements, if any.
-    If no enhacements, then you may declare that the current proposal is good enough and ready to be written as title and abstact.
+    description="""Evaluate the proposed contribution in terms of novelty and impact.
+		Write a short report with clear possible enhancements, if any.
+    If there are no enhancements, you may declare that the current proposal is good enough and ready to be written as a title and abstract.
     """,
     agent=Supervisor, 
-    expected_output='Either an evaluation report with clear potential enhancments for the proposed contribution, or if no furthur enhacements needed, then the outpout is a short paragraph summary of the the proposed contribution.'
+    expected_output='Either an evaluation report with clear potential enhancements for the proposed contribution, or, if no further enhancements are needed, a short paragraph summarizing the proposed contribution.'
 )
 ```
 
-Result Example: 
+Result example: 
 
 **Title: Enhancing Contextualized Reasoning Abilities in LLMs: A Novel Approach and Evaluation**
 
 **Abstract**: 
 
-This research paper presents a novel approach to enhance the contextualized reasoning abilities of Large Language Models (LLMs). The proposed approach leverages recent advancements in natural language processing and machine learning to enable LLMs to reason more effectively within specific contexts. The paper begins by providing a comprehensive overview of the current state-of-the-art in LLM research, highlighting the limitations of existing models in handling complex reasoning tasks. The proposed approach is then described in detail, outlining its key components and underlying algorithms. The paper proceeds to present a thorough evaluation of the proposed approach, demonstrating its effectiveness in improving the reasoning abilities of LLMs on a range of benchmark datasets. The results of the evaluation indicate that the proposed approach significantly outperforms existing methods, achieving state-of-the-art performance on several reasoning tasks. The paper concludes by discussing the potential implications of the proposed approach for various applications, such as natural language understanding, question answering, and dialogue generation.
+This research paper presents a novel approach to enhance the contextualized reasoning abilities of Large Language Models (LLMs). The proposed approach leverages recent advancements in natural language processing and machine learning to enable LLMs to reason more effectively within specific contexts. The paper begins by providing a comprehensive overview of the current state of the art in LLM research, highlighting the limitations of existing models in handling complex reasoning tasks. The proposed approach is then described in detail, outlining its key components and underlying algorithms. The paper proceeds to present a thorough evaluation of the proposed approach, demonstrating its effectiveness in improving the reasoning abilities of LLMs on a range of benchmark datasets. The results of the evaluation indicate that the proposed approach significantly outperforms existing methods, achieving state-of-the-art performance on several reasoning tasks. The paper concludes by discussing the potential implications of the proposed approach for various applications, such as natural language understanding, question answering, and dialogue generation.
 
 ---
 
-## 4) Multi agent research team with an agent as a custom Manager
+## 4) Multi-agent research team with an agent as a custom Manager
 
 <a target="_blank" href="https://colab.research.google.com/drive/1NirBFAF2NUQl5x-CNPKeuXgk-e1_2ty_?usp=sharing">
 <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -196,14 +197,14 @@ This research paper presents a novel approach to enhance the contextualized reas
 
 ![multiagents004.png](images/multiagents004.png) 
 
-This code defines a multi-agent system designed to act as a research assistant in the field of Large Language Models (LLMs). It includes agents for research, supervision, and writing, each with specific roles and goals. The agents collaborate to propose, evaluate, and refine a novel research contribution in the LLM domain. The agent manager coordinates the efforts of these agents, ensuring efficient task completion and high-quality output, the agents work together effectively to achieve the overall goal.
+This code defines a multi-agent system designed to act as a research assistant in the field of Large Language Models (LLMs). It includes agents for research, supervision, and writing, each with specific roles and goals. The agents collaborate to propose, evaluate, and refine a novel research contribution in the LLM domain. The manager agent coordinates the efforts of these agents, ensuring efficient task completion and high-quality output, so that the agents work together effectively to achieve the overall goal.
 
 Define the manager agent:
 ```
 manager = Agent(
     role="Research Manager",
     goal="Efficiently manage the crew and ensure high-quality task completion",
-    backstory="You're an experienced project manager with research background in the area of {research_area}, skilled in overseeing complex tasks and projects and guiding teams to success. Your role is to coordinate the efforts of the crew members, ensuring that each task is completed to the highest standard. Ensuring the the crew memeber are utilized efficiently.",
+    backstory="You're an experienced project manager with a research background in the area of {research_area}, skilled in overseeing complex tasks and projects and guiding teams to success. Your role is to coordinate the efforts of the crew members, ensuring that each task is completed to the highest standard. You ensure that the crew members are utilized efficiently.",
     allow_delegation=True,
     llm=llm
     )
@@ -214,16 +215,16 @@ Define the task:
 task = Task(
     description="""
     1) Search for and propose a novel and impactful contribution as a new LLMs research paper.
-    2) Evalaute the proposed contribution in terms of novelty and impact.
-    3) Propose clear possible enhacements, if any, to be conducted to enhance the contribution.
+    2) Evaluate the proposed contribution in terms of novelty and impact.
+    3) Propose clear possible enhancements, if any, to be conducted to enhance the contribution.
     4) Apply enhancements to the proposed contribution.
-    5) After repeated cycles of proposing and enhancing the contribution, and if the contribution is good enough, write the final output as a title and abstact of the contribution.
+    5) After repeated cycles of proposing and enhancing the contribution, and if the contribution is good enough, write the final output as a title and abstract of the contribution.
     """,
     expected_output='Title of a paper, and the abstract as a paragraph. If you are going to use the search tool, replace the search positional argument to be search_query'
 )
 ```
 
-Define crew with a custom manager agent:
+Define the crew with a custom manager agent:
 ```
 crew = Crew(
     agents=[Researcher, Supervisor, Writer],
@@ -252,10 +253,10 @@ Large Language Models (LLMs) have revolutionized natural language processing tas
 
 ![multiagents005.png](images/multiagents005.png) 
 
-This example demonstrates how to build a multi-agent system using the crewai library. The system simulates a research environment with agents acting as researchers, an integrator, and a writer, collaborating to generate and refine research and business ideas on a given topic. It leverages a large language model (LLM) for text generation and tools like web search for information gathering. Async task: the task executes asynchronously, allowing progression without waiting for completion. Multi agent system as a research assistant This is a simple multi agent system with:
-- Two researchers (Scientific and Business) wokring in parallel (Async) and thier proposed ideas are intergrated into a more appealing idea.
-- Memory to aid agents to remember, reason, and learn from past interactions.
-- Web search to for finding a novel and impactful research contribution
+This example demonstrates how to build a multi-agent system using the crewAI library. The system simulates a research environment with agents acting as researchers, an integrator, and a writer, collaborating to generate and refine research and business ideas on a given topic. It leverages a large language model (LLM) for text generation and tools like web search for information gathering. Async tasks: a task executes asynchronously, allowing progression without waiting for its completion. This is a simple multi-agent research assistant with:
+- Two researchers (Scientific and Business) working in parallel (async), whose proposed ideas are integrated into a more appealing idea.
+- Memory to help agents remember, reason, and learn from past interactions.
+- Web search for finding a novel and impactful research contribution
 
 Define Async Tasks: 
 ```
@@ -283,7 +284,7 @@ task2 = Task(
 
 ```
 
-Define the crew
+Define the crew:
 ```
 # Define the Crew
 crew = Crew(
